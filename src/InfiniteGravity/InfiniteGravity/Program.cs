@@ -1,7 +1,10 @@
 ﻿#region Using Statements
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using InfiniteGravity.Configuration;
+using Newtonsoft.Json;
+
 #if MONOMAC
 using MonoMac.AppKit;
 using MonoMac.Foundation;
@@ -9,36 +12,48 @@ using MonoMac.Foundation;
 using Foundation;
 using UIKit;
 #endif
+
 #endregion
 
-namespace InfiniteGravity
-{
+namespace InfiniteGravity {
 #if __IOS__ || __TVOS__
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
 #else
-	static class Program
+    static class Program
 #endif
-	{
-		private static Game1 game;
+    {
 
-		internal static void RunGame()
-		{
-			game = new Game1();
-			game.Run();
+    public const string ConfigFileName = "game_config.json";
+
+    private static NGame game;
+
+    internal static void RunGame() {
+    GameConfiguration config = null;
+        // load config file
+        if (File.Exists(ConfigFileName)) {
+        config = JsonConvert.DeserializeObject<GameConfiguration>(File.ReadAllText(ConfigFileName));
+    }
+    else {
+    config = new GameConfiguration();
+    File.WriteAllText(ConfigFileName, JsonConvert.SerializeObject(config, Formatting.Indented));
+    }
+    config.bind(ConfigFileName);
+    var context = new GameContext(config);
+    game = new NGame(context);
+    game.Run();
 #if !__IOS__ && !__TVOS__
-			game.Dispose();
+    game.Dispose();
 #endif
-		}
+}
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
+/// <summary>
+/// The main entry point for the application.
+/// </summary>
 #if !MONOMAC && !__IOS__ && !__TVOS__
-		[STAThread]
+[STAThread]
 #endif
-		static void Main(string[] args)
-		{
+static void Main(string[] args) {
 #if MONOMAC
             NSApplication.Init ();
 
@@ -49,9 +64,9 @@ namespace InfiniteGravity
 #elif __IOS__ || __TVOS__
             UIApplication.Main(args, null, "AppDelegate");
 #else
-			RunGame();
+RunGame();
 #endif
-		}
+}
 
 #if __IOS__ || __TVOS__
         public override void FinishedLaunching(UIApplication app)
@@ -59,8 +74,7 @@ namespace InfiniteGravity
             RunGame();
         }
 #endif
-	}
-
+}
 #if MONOMAC
     class AppDelegate : NSApplicationDelegate
     {

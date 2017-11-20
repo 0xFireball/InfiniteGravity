@@ -1,0 +1,67 @@
+{
+	// defines colors accessible via skin.getColor. These can also be referenced in actual style definitions below
+	colors:
+	{
+		carbon: [60, 60, 60, 255],
+		medCarbon: [100, 100, 100, 255],
+		lightCarbon: [120, 120, 120, 255],
+		
+		ghostWhite: [248, 248, 248, 255],
+		gray: [128, 128, 128, 255],
+		dimGray: [105, 105, 105, 255],
+		
+		// pink metals
+		pinkMetal1: [172, 117, 139, 255],
+		pinkMetal2: [101, 16, 49, 255],
+		pinkMetal3: [136, 40, 77, 255],
+		pinkMetal4: [83, 68, 74, 255],
+		pinkMetal5: [119, 93, 103, 255],
+		pinkMetal6: [125, 74, 94, 255],
+		pinkMetal7: [95, 58, 70, 255],
+		pinkMetal8: [125, 42, 74, 255],
+		pinkMetal9: [119, 18, 84, 255],
+		pinkMetal10: [255, 0, 98, 255],
+	},
+	
+	
+	TextButtonStyle: {
+		default: {
+			up: 'carbon',
+			down: 'medCarbon',
+			over: 'lightCarbon',
+			fontColor: 'ghostWhite',
+			downFontColor: 'gray',
+			disabledFontColor: 'dimGray',
+			font: 'Fonts/bm_pixeled'
+		},
+		pink_metal: {
+			up: 'pinkMetal6',
+			down: 'pinkMetal8',
+			over: 'pinkMetal9',
+			fontColor: 'ghostWhite',
+			downFontColor: 'gray',
+			disabledFontColor: 'dimGray',
+			font: 'Fonts/bm_pixeled'
+		}
+	},
+	
+	LabelStyle: {
+		default: {
+			font: 'Fonts/bm_pixeled',
+			fontColor: 'ghostWhite',
+		},
+		pink_metal: {
+			font: 'Fonts/bm_pixeled',
+			fontColor: 'ghostWhite',
+		}
+	},
+	
+	SelectBoxStyle: {
+		pink_metal: {
+			font: 'Fonts/bm_pixeled',
+			fontColor: 'ghostWhite',
+			background: 'pinkMetal6',
+		}
+	}
+	
+}

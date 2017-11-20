@@ -8,5 +8,83 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\lib\FFNez\Nez.PipelineImporter\bin\Debug\Nez.PipelineImporter.dll
+/reference:..\..\..\..\lib\FFNez\Nez.PipelineImporter\bin\Debug\Ionic.Zlib.dll
+/reference:..\..\..\..\lib\FFNez\Nez.PipelineImporter\bin\Debug\Newtonsoft.Json.dll
+/reference:..\..\..\..\lib\FFNez\Nez.PipelineImporter\bin\Debug\Nez.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin petaphaser_cover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:petaphaser_cover.png
+
+#begin Fonts/bm_pixeled_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Fonts/bm_pixeled_0.png
+
+#begin Fonts/bm_pixeled.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/processorParam:packTexturesIntoXnb=True
+/processorParam:compressTextures=False
+/build:Fonts/bm_pixeled.fnt
+
+#begin Fonts/disposable_droid_lg.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/disposable_droid_lg.spritefont
+
+#begin Fonts/disposable_droid.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/disposable_droid.spritefont
+
+#begin Sprites/Misc/cur_pointer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Misc/cur_pointer.png
+
+#begin Sprites/Misc/cur_target.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Misc/cur_target.png
+
+#begin UI/Skins/menu_skin.json
+/importer:UISkinImporter
+/processor:UISkinProcessor
+/build:UI/Skins/menu_skin.json
