@@ -9,6 +9,8 @@ namespace InfiniteGravity.Configuration {
         public GameContext(GameConfiguration configuration) {
             this.configuration = configuration;
         }
+
+        public string map = "the_square";
     }
 
     public class GameConfiguration {

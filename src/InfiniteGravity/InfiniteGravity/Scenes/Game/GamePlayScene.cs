@@ -5,10 +5,12 @@ using InfiniteGravity.Scenes.Base;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Fuf;
+using Nez.Tiled;
 
 namespace InfiniteGravity.Scenes.Game {
     public class GamePlayScene : BaseGameScene {
         private GameContext _gameContext;
+        private string mapSource = "Maps";
 
         private const int renderlayer_backdrop = 65535;
         private const int renderlayer_ui_overlay = 1 << 30;
@@ -36,6 +38,15 @@ namespace InfiniteGravity.Scenes.Game {
             // sprites
             var player = createEntity("player", new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
             player.addComponent<Rookie>();
+            
+            // map
+            var mapEntity = createEntity("map_tiles");
+            var mapAsset = content.Load<TiledMap>($"{mapSource}/{_gameContext.map}");
+            var mapComponent = mapEntity.addComponent(new TiledMapComponent(mapAsset, "blocks"));
+            // map behind everything
+            mapComponent.renderLayer = renderlayer_background;
+            
+            
         }
     }
 }

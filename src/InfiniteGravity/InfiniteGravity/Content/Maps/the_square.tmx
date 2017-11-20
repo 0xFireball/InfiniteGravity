@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" source="tilesets/concrete.tsx"/>
- <layer name="block" width="60" height="60">
+ <layer name="blocks" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztmk1uwkAMhb2F8tOkBboJBZKD+Wg+So7Wzxml6yyqSuPxk54IGha82J5vImUSmUd8wG/4HZ/xJ/7AX/gWYP0lohPmc37iPd7hEz7iHnf4ii8B1smo1FXJbnw3CS7uh9IDSr3t2kBeaq/0u9Lj1jWQlz5XZluZa+sbyMtM67nYjg3k7UttvcZ2aiBvV2bXZ9h2DeS9lr3Z92jbN5D3Utib/A2q5G9sJX9jK/kbW8nf2Er+xlbyN7aSv7GV/I2t5G9sJX9jK/kbW8nf2Er+xlbyN7aSv7GV/I2t5G9sbeXvgO+y9IPPgHzz26HC+7OVv+STB57woVzbvcK8W/m77mue113rvG/l77qvrXlrnfet/KV39VH6fnlvnOuZHp//63/+lbbyl71Jyafre+Pkn4cK8yZ/Yyuff2Mrn39ja+XvSNZnYbDfA6+797rPt+9pv+fm2tfJKC9ZzkzGp5FdqLefF/0MJexjwmwL/b6cm2tfH0tW+QGtUfty
+   eJztWstugzAQ3CtpHoU2pBfSJPBh+2n+FD6tY4yrHBrYoF4y7EijdcTK3o29HltyJ9K34BZ8A9/BA/gJfoBf4Ing+01EOxC2v4IbsAD34A6swBKswSPBd+SomFdF7gG/g5AD/4diDSjmO9QryBdzr1jvijUeyhXki3WuqG1FXYdqBfmipvWQGHYryLdKcxvnOOxXkG+ZajfWcCgm8m3Aswz1Hvc4+YZvY/Sfso/a99Y6jiWuOu3NcY8Omwk/9CMXEFot29QOZ6P/lH3UvrfWcSxxHZP2zupv1q1u7HtuPy/Gc0z2X8q5+J+Ny6q/Wbdyv3P7OWLUyz/k283U2bNxWfU3x5/PpWj3WEu9Id/Bd6m1jmONy6q/2AMU/Wg+l2KcvpnoN/sXo+9Sax3HGpfrLzes+ssCq/6ywKq/LPD7Lzf8/ssN119uuP5yw/WXG66/3HD95YbrLzdcf7nh+ssN119uuP5yw/WXG66/f4PlfY5Vf1ne51j1l+V9jlV/Wd7nWPWX5X2OVX9Z3ue4/nLD77/c8PsvN7L+tsj1mjQ4/gdx3uNaj/Ud97Tf8+mrf0eOcpN0joENyF0w3/FcFs8qgn1MUNuC9T6cT1/9e5tylR9oRI8W
   </data>
  </layer>
 </map>
