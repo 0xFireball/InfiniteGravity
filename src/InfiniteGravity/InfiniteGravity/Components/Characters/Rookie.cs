@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using InfiniteGravity.Components.Characters.Base;
 using Nez;
 using Nez.Sprites;
@@ -53,7 +54,11 @@ namespace InfiniteGravity.Components.Characters {
                 base.update();
 
                 var sprite = entity.getComponent<Character>();
-                var animation = Animations.Run;
+                var animation = Animations.Idle;
+
+                if (Math.Abs(angularVelocity) > 0) {
+                    animation = Animations.Ready;
+                }
 
                 // TODO: Directions
 

@@ -29,6 +29,7 @@ namespace InfiniteGravity {
             base.Initialize();
 
             Window.Title = GameTitle;
+            Window.AllowUserResizing = false;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;

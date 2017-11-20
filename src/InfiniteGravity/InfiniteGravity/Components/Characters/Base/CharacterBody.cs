@@ -9,6 +9,14 @@ namespace InfiniteGravity.Components.Characters.Base {
         private CharacterController _controller;
 
         public float movementSpeed = 120.0f;
+        public float angularThrust = (float) Math.PI * 0.4f;
+
+        public override void initialize() {
+            base.initialize();
+            
+            maxAngular = (float) Math.PI * 0.2f;
+            angularDrag = (float) Math.PI * 0.3f;
+        }
 
         public override void onAddedToEntity() {
             base.onAddedToEntity();
@@ -37,6 +45,11 @@ namespace InfiniteGravity.Components.Characters.Base {
 
         private void movement() {
             var movementVel = Vector2.Zero;
+
+            if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
+                var turn = _controller.moveDirectionInput.value.X * angularThrust;
+                angularVelocity += turn;
+            }
 
             // TODO: movement
             velocity += movementVel;

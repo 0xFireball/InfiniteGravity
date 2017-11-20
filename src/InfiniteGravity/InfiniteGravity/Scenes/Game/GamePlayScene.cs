@@ -1,4 +1,7 @@
-﻿using InfiniteGravity.Components.Characters;
+﻿using System;
+using InfiniteGravity.Components.Camera;
+using InfiniteGravity.Components.Characters;
+using InfiniteGravity.Components.Characters.Base;
 using InfiniteGravity.Components.Misc;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes.Base;
@@ -34,11 +37,13 @@ namespace InfiniteGravity.Scenes.Game {
             var cursorComponent = targetCursor.addComponent<TargetCursor>();
             cursorComponent.sprite.renderLayer = renderlayer_cursor_overlay;
             targetCursor.addComponent<MouseFollow>();
-            
+
             // sprites
-            var player = createEntity("player", new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
+            var player = createEntity("player",
+                new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
             player.addComponent<Rookie>();
-            
+            player.addComponent<PlayerCharacterController>();
+
             // map
             var mapEntity = createEntity("map_tiles");
             var mapAsset = content.Load<TiledMap>($"{mapSource}/{_gameContext.map}");
@@ -46,7 +51,9 @@ namespace InfiniteGravity.Scenes.Game {
             // map behind everything
             mapComponent.renderLayer = renderlayer_background;
             
-            
+            // add component to make camera follow the player
+            var lockedCamera = camera.entity.addComponent(new LockedCamera(player));
+            lockedCamera.followLerp = 1.0f;
         }
     }
 }
