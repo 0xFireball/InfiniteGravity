@@ -1,6 +1,8 @@
-﻿using InfiniteGravity.Components.Misc;
+﻿using InfiniteGravity.Components.Characters;
+using InfiniteGravity.Components.Misc;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes.Base;
+using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Fuf;
 
@@ -30,6 +32,10 @@ namespace InfiniteGravity.Scenes.Game {
             var cursorComponent = targetCursor.addComponent<TargetCursor>();
             cursorComponent.sprite.renderLayer = renderlayer_cursor_overlay;
             targetCursor.addComponent<MouseFollow>();
+            
+            // sprites
+            var player = createEntity("player", new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
+            player.addComponent<Rookie>();
         }
     }
 }
