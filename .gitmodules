@@ -1,0 +1,6 @@
+[submodule "lib/Nez.Fuf"]
+	path = lib/Nez.Fuf
+	url = https://gitlab.com/0xFireball/Nez.Fuf.git
+[submodule "lib/FFNez"]
+	path = lib/FFNez
+	url = https://github.com/0xFireball/FFNez.git
