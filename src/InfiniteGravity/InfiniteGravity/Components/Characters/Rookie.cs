@@ -43,28 +43,11 @@ namespace InfiniteGravity.Components.Characters {
             body = entity.addComponent<RookieBody>();
         }
 
-        public class RookieBody : CharacterBody {
+        public class RookieBody : AnimatedCharacterBody {
             public override void initialize() {
                 base.initialize();
 
                 movementSpeed = 210f;
-            }
-
-            public override void update() {
-                base.update();
-
-                var sprite = entity.getComponent<Character>();
-                var animation = Animations.Idle;
-
-                if (Math.Abs(angularVelocity) > 0) {
-                    animation = Animations.Ready;
-                }
-
-                // TODO: Directions
-
-                if (!sprite.Animation.isAnimationPlaying(animation)) {
-                    sprite.Animation.play(animation);
-                }
             }
         }
     }

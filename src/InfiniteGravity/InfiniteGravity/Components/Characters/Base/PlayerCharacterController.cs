@@ -13,6 +13,8 @@ namespace InfiniteGravity.Components.Characters.Base {
             moveDirectionInput.nodes.Add(new VirtualJoystick.KeyboardKeys(VirtualInput.OverlapBehavior.CancelOut,
                 Keys.A, Keys.D, Keys.W, Keys.S));
             moveDirectionInput.nodes.Add(new VirtualJoystick.GamePadLeftStick());
+            
+            thrustInput.nodes.Add(new VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.CancelOut, Keys.Z, Keys.X));
 
             primaryActionInput.nodes.Add(new VirtualButton.MouseLeftButton());
             primaryActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.F));

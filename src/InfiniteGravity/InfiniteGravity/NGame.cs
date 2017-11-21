@@ -1,6 +1,7 @@
 ﻿using InfiniteGravity.Assets;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Fuf;
 
@@ -30,6 +31,8 @@ namespace InfiniteGravity {
 
             Window.Title = GameTitle;
             Window.AllowUserResizing = false;
+            
+            Core.defaultSamplerState = SamplerState.PointClamp;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;

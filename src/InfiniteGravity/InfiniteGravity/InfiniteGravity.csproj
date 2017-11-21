@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Assets\UiAssets.cs" />
     <Compile Include="Components\Camera\LockedCamera.cs" />
+    <Compile Include="Components\Characters\Base\AnimatedCharacterBody.cs" />
     <Compile Include="Components\Characters\Base\CharacterBody.cs" />
     <Compile Include="Components\Characters\Base\CharacterController.cs" />
     <Compile Include="Components\Characters\Base\LogicCharacterController.cs" />
