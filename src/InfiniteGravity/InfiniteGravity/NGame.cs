@@ -32,7 +32,7 @@ namespace InfiniteGravity {
             Window.Title = GameTitle;
             Window.AllowUserResizing = false;
             
-            Core.defaultSamplerState = SamplerState.PointClamp;
+            Core.defaultSamplerState = SamplerState.AnisotropicClamp;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;
