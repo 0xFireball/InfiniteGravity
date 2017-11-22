@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Fuf;
 using Nez.Fuf.Physics;
+using OpenGL;
 
 namespace InfiniteGravity.Components.Characters.Base {
     public abstract class CharacterBody : KinematicBody {
@@ -16,7 +17,10 @@ namespace InfiniteGravity.Components.Characters.Base {
         public Vector2 attachedSurfaceNormal = Vector2.Zero;
         public float attachmentSlowdown = 12;
 
-        public float attachAngleVariance = (float) Math.PI / 6f;
+        public float surfaceAlignAngleVariance = (float) Math.PI / 6f;
+        public float surfaceAttachEpsilon = (float) Math.PI / 64f;
+
+        public float surfaceAlignLerp = 0.2f;
 
         public float baseDrag = 0f;
         public float surfaceDrag = 100f;
@@ -59,12 +63,18 @@ namespace InfiniteGravity.Components.Characters.Base {
                     
                     var normalAngle = Mathf.atan2(result.normal.Y, result.normal.X);
 
-                    var angleToNormal = Mathf.acos(Vector2.Dot(upward, result.normal));
+                    var angleToNormal = Math.Abs(Mathf.acos(Vector2.Dot(upward, result.normal)));
 
-                    if (Math.Abs(angleToNormal) < attachAngleVariance) {
-                        attachedSurfaceNormal = result.normal;
-                        // TODO: Start a tween to align
-                        var targetAngle = normalAngle + halfPi;
+                    if (angleToNormal < surfaceAlignAngleVariance) {
+                        var targetAngle = (normalAngle + halfPi) % (Mathf.PI * 2);
+                        if (angleToNormal < surfaceAttachEpsilon) {
+                            attachedSurfaceNormal = result.normal;
+                            angle = targetAngle;
+                        } else {
+                            // angle closer to the target
+                            var currentAngle = angle % (Mathf.PI * 2);
+                            angle = Mathf.lerpAngle(currentAngle, targetAngle, surfaceAlignLerp);
+                        }
                         drag = new Vector2(surfaceDrag);
                     }
                 }
