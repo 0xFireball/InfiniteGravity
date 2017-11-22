@@ -22,6 +22,7 @@ namespace InfiniteGravity.Configuration {
         public class GraphicsConfiguration {
             public bool fullscreen = false;
             public ScaleMode scaleMode = ScaleMode.PixelPerfect;
+            public bool antialiasing = true;
 
             public enum ScaleMode {
                 PixelPerfect,

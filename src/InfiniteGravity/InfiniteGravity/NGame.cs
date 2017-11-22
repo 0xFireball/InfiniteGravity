@@ -1,4 +1,5 @@
-﻿using InfiniteGravity.Assets;
+﻿using System.Runtime.Remoting.Contexts;
+using InfiniteGravity.Assets;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +33,7 @@ namespace InfiniteGravity {
             Window.Title = GameTitle;
             Window.AllowUserResizing = false;
             
-            Core.defaultSamplerState = SamplerState.AnisotropicClamp;
+            Core.defaultSamplerState = gameContext.configuration.graphics.antialiasing ? SamplerState.AnisotropicClamp : SamplerState.PointClamp;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;
