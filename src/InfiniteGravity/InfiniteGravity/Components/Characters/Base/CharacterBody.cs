@@ -7,7 +7,7 @@ using Nez.Fuf.Physics;
 
 namespace InfiniteGravity.Components.Characters.Base {
     public abstract class CharacterBody : KinematicBody {
-        private CharacterController _controller;
+        protected CharacterController _controller;
 
         public float movementSpeed = 120.0f;
         public float angularThrust = (float) Math.PI * 0.4f;
@@ -64,7 +64,7 @@ namespace InfiniteGravity.Components.Characters.Base {
                     if (Math.Abs(angleToNormal) < attachAngleVariance) {
                         attachedSurfaceNormal = result.normal;
                         // TODO: Start a tween to align
-                        angle = normalAngle + halfPi;
+                        var targetAngle = normalAngle + halfPi;
                         drag = new Vector2(surfaceDrag);
                     }
                 }
@@ -82,6 +82,11 @@ namespace InfiniteGravity.Components.Characters.Base {
             }
         }
 
+        protected float calculateSurfaceAngle() {
+            return Mathf.atan2(attachedSurfaceNormal.Y, attachedSurfaceNormal.X) +
+                   (float) (Math.PI / 2f);
+        }
+
         private void movement() {
             var movementVel = Vector2.Zero;
 
@@ -89,8 +94,7 @@ namespace InfiniteGravity.Components.Characters.Base {
 
             if (attachedSurfaceNormal.Length() > 0) {
                 // attached, run along the surface
-                var surfaceAngle = Mathf.atan2(attachedSurfaceNormal.Y, attachedSurfaceNormal.X) +
-                                   (float) (Math.PI / 2f);
+                var surfaceAngle = calculateSurfaceAngle();
                 if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
                     var run = new Vector2(_controller.moveDirectionInput.value.X, 0) * movementSpeed;
                     run = Vector2Ext.transform(run, Matrix2D.createRotation(surfaceAngle));
