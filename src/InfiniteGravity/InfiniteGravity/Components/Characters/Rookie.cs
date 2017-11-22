@@ -33,8 +33,8 @@ namespace InfiniteGravity.Components.Characters {
 
             facing = Direction.Right;
             
-            // TODO: Collision 
-            entity.addComponent(new BoxCollider(-4, -6, 8, 12));
+            // TODO: Collision
+            entity.addComponent(new BoxCollider(-4, -8, 10, 24));
         }
 
         public override void initialize() {
