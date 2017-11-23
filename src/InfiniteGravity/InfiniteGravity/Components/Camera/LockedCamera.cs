@@ -1,14 +1,39 @@
-﻿using Nez;
+﻿using Microsoft.Xna.Framework;
+using Nez;
 
 namespace InfiniteGravity.Components.Camera {
-    public class LockedCamera : FollowCamera {
-        public LockedCamera(Entity targetEntity, Nez.Camera camera) : base(targetEntity, camera) { }
-        public LockedCamera(Entity targetEntity) : base(targetEntity) { }
+    public class LockedCamera : Component, IUpdatable {
+        private readonly Entity _targetEntity;
+        private readonly Nez.Camera camera;
 
-        public override void update() {
-            base.update();
+        private Vector2 _precisePosition;
+        private Vector2 _lastPosition;
 
+        public LockedCamera(Entity targetEntity, Nez.Camera camera) {
+            _targetEntity = targetEntity;
+            this.camera = camera;
+        }
+
+        public void update() {
+            if (_targetEntity != null) {
+                updateFollow();
+            }
+        }
+
+        private void updateFollow() {
+            // handle teleportation
+            if (_lastPosition != camera.position) {
+                _precisePosition = camera.position;
+            }
+
+            // lock position
+            _precisePosition = _targetEntity.position;
+            // lock rotation
             camera.transform.localRotation = -_targetEntity.transform.localRotation;
+
+            camera.position = _precisePosition;
+            
+            _lastPosition = camera.position;
         }
     }
 }

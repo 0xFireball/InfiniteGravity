@@ -19,11 +19,14 @@ namespace InfiniteGravity.Scenes {
             // Hide cursor
             Core.instance.IsMouseVisible = false;
 
+            clearColor = new Color(10);
+
             var coverTexture = content.Load<Texture2D>("petaphaser_cover");
             var cover = createEntity("cover", Core.instance.defaultResolution.ToVector2() / 2);
             var coverSprite = cover.addComponent(new Sprite(coverTexture));
             var targetWidth = Core.instance.defaultResolution.X * 0.7f;
-            coverSprite.transform.localScale = new Vector2(targetWidth / coverSprite.width);
+            var baseScale = (int) (targetWidth / coverSprite.width);
+            coverSprite.transform.localScale = new Vector2(baseScale);
             var coverBlend = new BlendState();
             coverBlend.AlphaSourceBlend =
                 coverBlend.ColorSourceBlend = Blend.SourceAlpha;
@@ -36,7 +39,7 @@ namespace InfiniteGravity.Scenes {
                 .setEaseType(EaseType.QuadIn)
                 .setDelay(0.7f)
                 .setCompletionHandler(t => {
-                    coverSprite.transform.tweenLocalScaleTo(1.2f, 0.4f)
+                    coverSprite.transform.tweenLocalScaleTo(baseScale * 1.2f, 0.4f)
                         .setEaseType(EaseType.CubicOut)
                         .setDelay(intro_length)
                         .start();

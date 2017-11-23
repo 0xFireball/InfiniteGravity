@@ -33,7 +33,7 @@ namespace InfiniteGravity {
             Window.Title = GameTitle;
             Window.AllowUserResizing = false;
             
-            Core.defaultSamplerState = gameContext.configuration.graphics.antialiasing ? SamplerState.AnisotropicClamp : SamplerState.PointClamp;
+//            Core.defaultSamplerState = gameContext.configuration.graphics.antialiasing ? SamplerState.LinearClamp : SamplerState.PointClamp;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;
