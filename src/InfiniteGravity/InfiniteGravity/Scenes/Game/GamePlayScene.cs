@@ -6,8 +6,12 @@ using InfiniteGravity.Components.Misc;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes.Base;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Nez;
 using Nez.Fuf;
+using Nez.Fuf.Util;
+using Nez.Sprites;
 using Nez.Tiled;
 
 namespace InfiniteGravity.Scenes.Game {
@@ -15,9 +19,14 @@ namespace InfiniteGravity.Scenes.Game {
         private GameContext _gameContext;
         private string mapSource = "Maps";
 
-        private const int renderlayer_backdrop = 65535;
-        private const int renderlayer_ui_overlay = 1 << 30;
+        private const int renderlayer_backdrop = 257;
+        private const int renderlayer_ui_overlay = 1024;
         private const int renderlayer_cursor_overlay = 1 << 31;
+
+        private const int renderlayer_pause_overlay = 2048;
+
+        private Renderer pauseRenderer;
+        private bool paused = false;
 
         public override void initialize() {
             base.initialize();
@@ -30,7 +39,7 @@ namespace InfiniteGravity.Scenes.Game {
 
             // add fixed renderer
             var fixedRenderer =
-                addRenderer(new ScreenSpaceRenderer(int.MaxValue, renderlayer_ui_overlay, renderlayer_cursor_overlay));
+                addRenderer(new ScreenSpaceRenderer(1023, renderlayer_ui_overlay, renderlayer_cursor_overlay));
 
             // ...and add custom cursor
             var targetCursor = createEntity("cursor");
@@ -54,7 +63,31 @@ namespace InfiniteGravity.Scenes.Game {
             // add component to make camera follow the player
             var lockedCamera = camera.entity.addComponent(new LockedCamera(player, camera));
 
+            pauseRenderer = new ScreenSpaceRenderer(255, renderlayer_pause_overlay);
+            var pauseBackdrop = createEntity("pause_backdrop");
+            var backdropTexture = Graphics.createSingleColorTexture(1, 1, new Color(100, 100, 100, 100));
+//            Graphics.instance.batcher.draw(backdropTexture, new RectangleF(0, 0, Core.instance.defaultResolution.X, Core.instance.defaultResolution.Y));
+            var backdropSprite = pauseBackdrop.addComponent(new Sprite(backdropTexture));
+            backdropSprite.renderLayer = renderlayer_pause_overlay;
+            backdropSprite.transform.scale = Core.instance.defaultResolution.ToVector2();
+            backdropSprite.transform.position = Core.instance.defaultResolution.ToVector2() / 2;
+
 //            camera.zoom = -0.5f;
+        }
+
+        public override void update() {
+            base.update();
+
+            if (Input.isKeyPressed(Keys.Escape)) {
+                if (paused) {
+                    removeRenderer(pauseRenderer);
+                    Time.timeScale = 1f;
+                } else {
+                    addRenderer(pauseRenderer);
+                    Time.timeScale = 0f;
+                }
+                paused = !paused;
+            }
         }
     }
 }
