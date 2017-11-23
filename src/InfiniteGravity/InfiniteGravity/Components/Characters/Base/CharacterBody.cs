@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using InfiniteGravity.Util;
 using Microsoft.Xna.Framework;
 using Nez;
@@ -27,6 +28,14 @@ namespace InfiniteGravity.Components.Characters.Base {
 
         public float jumpVelocity = -240f;
 
+        public enum MovementState {
+            Free,
+            Aligning,
+            Attached
+        }
+
+        public MovementState movementState = MovementState.Free;
+
         public override void initialize() {
             base.initialize();
 
@@ -48,6 +57,8 @@ namespace InfiniteGravity.Components.Characters.Base {
             drag = new Vector2(baseDrag);
             attachedSurfaceNormal = Vector2.Zero;
 
+            movementState = MovementState.Free;
+
             // collision
             if (entity.getComponent<BoxCollider>().collidesWithAny(ref physicsDeltaMovement, out var result)) {
                 // check if touching tilemap
@@ -60,7 +71,7 @@ namespace InfiniteGravity.Components.Characters.Base {
 
                     var upward = new Vector2(0, -1);
                     upward = Vector2Ext.transform(upward, Matrix2D.createRotation(angle));
-                    
+
                     var normalAngle = Mathf.atan2(result.normal.Y, result.normal.X);
 
                     var angleToNormal = Math.Abs(Mathf.acos(Vector2.Dot(upward, result.normal)));
@@ -70,10 +81,12 @@ namespace InfiniteGravity.Components.Characters.Base {
                         if (angleToNormal < surfaceAttachEpsilon) {
                             attachedSurfaceNormal = result.normal;
                             angle = targetAngle;
+                            movementState = MovementState.Attached;
                         } else {
                             // angle closer to the target
                             var currentAngle = angle % (Mathf.PI * 2);
                             angle = Mathf.lerpAngle(currentAngle, targetAngle, surfaceAlignLerp);
+                            movementState = MovementState.Aligning;
                         }
                         drag = new Vector2(surfaceDrag);
                     }
@@ -102,7 +115,7 @@ namespace InfiniteGravity.Components.Characters.Base {
 
             // if not anchored, use the jetpack
 
-            if (attachedSurfaceNormal.Length() > 0) {
+            if (movementState == MovementState.Attached) {
                 // attached, run along the surface
                 var surfaceAngle = calculateSurfaceAngle();
                 if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
@@ -119,9 +132,12 @@ namespace InfiniteGravity.Components.Characters.Base {
                     velocity += jump;
                 }
             } else {
-                if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
-                    var turn = _controller.moveDirectionInput.value.X * angularThrust;
-                    angularVelocity += turn;
+                // jetpack steering
+                if (movementState == MovementState.Free) {
+                    if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
+                        var turn = _controller.moveDirectionInput.value.X * angularThrust;
+                        angularVelocity += turn;
+                    }
                 }
             }
 

@@ -16,7 +16,7 @@ namespace InfiniteGravity.Components.Characters.Base {
                 animation = Character.Animations.Ready;
             }
 
-            if (attachedSurfaceNormal.Length() > 0) {
+            if (movementState == MovementState.Attached) {
                 // attached to a surface
                 // get velocity in the direction of the surface
                 // get the surface vector
