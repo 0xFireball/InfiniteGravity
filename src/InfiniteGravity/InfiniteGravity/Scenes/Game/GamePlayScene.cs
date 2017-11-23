@@ -54,7 +54,7 @@ namespace InfiniteGravity.Scenes.Game {
             // add component to make camera follow the player
             var lockedCamera = camera.entity.addComponent(new LockedCamera(player, camera));
 
-            camera.zoom = -0.5f;
+//            camera.zoom = -0.5f;
         }
     }
 }

@@ -14,6 +14,12 @@ namespace InfiniteGravity.Components.Camera {
             this.camera = camera;
         }
 
+        public override void onAddedToEntity() {
+            base.onAddedToEntity();
+
+            entity.updateOrder = int.MaxValue;
+        }
+
         public void update() {
             if (_targetEntity != null) {
                 updateFollow();
