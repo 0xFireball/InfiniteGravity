@@ -40,6 +40,7 @@ namespace InfiniteGravity.Scenes.Game {
             // add fixed renderer
             var fixedRenderer =
                 addRenderer(new ScreenSpaceRenderer(1023, renderlayer_ui_overlay, renderlayer_cursor_overlay));
+            fixedRenderer.shouldDebugRender = false;
 
             // ...and add custom cursor
             var targetCursor = createEntity("cursor");
@@ -71,6 +72,7 @@ namespace InfiniteGravity.Scenes.Game {
             backdropSprite.renderLayer = renderlayer_pause_overlay;
             backdropSprite.transform.scale = Core.instance.defaultResolution.ToVector2();
             backdropSprite.transform.position = Core.instance.defaultResolution.ToVector2() / 2;
+            pauseRenderer.shouldDebugRender = false;
 
 //            camera.zoom = -0.5f;
         }
