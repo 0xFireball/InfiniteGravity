@@ -6,6 +6,8 @@ namespace InfiniteGravity.Components.Characters.Base {
         public VirtualJoystick targetDirectionInput = new VirtualJoystick(true);
         
         public VirtualAxis thrustInput = new VirtualAxis();
+        
         public VirtualButton primaryActionInput = new VirtualButton();
+        public VirtualButton secondaryActionInput = new VirtualButton();
     }
 }
