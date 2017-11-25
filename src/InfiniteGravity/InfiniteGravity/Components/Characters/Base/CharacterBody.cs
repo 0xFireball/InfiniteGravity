@@ -28,14 +28,17 @@ namespace InfiniteGravity.Components.Characters {
 
         public float actionTime = 0;
 
-        private const float attackActionDuration = 0.4f;
+        private const float attackActionDuration = 0.38f;
 
         public float meleeComboTime = 0.05f;
 
         public int meleeComboCount = 0;
 
+        public bool actionCombo = false;
+
         public enum ActionState {
             None,
+            Cooldown,
             Interact,
             Melee,
             Gun
@@ -186,8 +189,21 @@ namespace InfiniteGravity.Components.Characters {
             // update action status
             if (actionState != ActionState.None) {
                 if (actionTime <= 0) {
-                    // action is over
-                    actionState = ActionState.None;
+                    if (actionCombo) {
+                        actionCombo = false;
+                        if (actionState == ActionState.Melee && meleeComboCount < 3) {
+                            // melee combo
+                            meleeComboCount++;
+                            actionTime = attackActionDuration;
+                        }
+                    } else if (actionState == ActionState.Cooldown) {
+                        // action is over
+                        actionState = ActionState.None;
+                    } else {
+                        // force a cooldown
+                        actionState = ActionState.Cooldown;
+                        actionTime = 0.2f;
+                    }
                 } else {
                     actionTime -= Time.deltaTime;
                 }
@@ -197,9 +213,7 @@ namespace InfiniteGravity.Components.Characters {
             if (movementState == MovementState.Attached && actionState == ActionState.Melee) {
                 if (_controller.primaryActionInput && actionTime < meleeComboTime) {
                     // melee combo
-                    meleeComboCount++;
-                    meleeComboCount %= 3; // there are only 3 melee combo portions
-                    actionTime = attackActionDuration;
+                    actionCombo = true;
                 }
             }
         }

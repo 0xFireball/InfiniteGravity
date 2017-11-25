@@ -43,7 +43,7 @@ namespace InfiniteGravity.Components.Characters {
                     break;
                 default:
                     // attack animations should never be flipped partway through
-                    
+
                     // facing direction
 
                     if (_controller.moveDirectionInput.value.Length() > 0) {
