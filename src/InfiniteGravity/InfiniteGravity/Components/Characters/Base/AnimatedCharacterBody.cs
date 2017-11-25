@@ -4,7 +4,7 @@ using Nez;
 
 namespace InfiniteGravity.Components.Characters {
     public abstract class AnimatedCharacterBody : CharacterBody {
-        private Direction lastSideDirection;
+        private Direction _lastSideDirection;
 
         public override void update() {
             base.update();
@@ -33,7 +33,10 @@ namespace InfiniteGravity.Components.Characters {
             // action-based animation
             switch (actionState) {
                 case ActionState.Melee:
-                    animation = Character.Animations.Melee1;
+                    if (meleeComboCount == 0) animation = Character.Animations.Melee1;
+                    else if (meleeComboCount == 1) animation = Character.Animations.Melee2;
+                    else if (meleeComboCount == 2) animation = Character.Animations.Melee3;
+                    
                     break;
                 case ActionState.Gun:
                     animation = Character.Animations.Gun1;
@@ -44,10 +47,10 @@ namespace InfiniteGravity.Components.Characters {
                     // facing direction
 
                     if (_controller.moveDirectionInput.value.Length() > 0) {
-                        lastSideDirection = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
+                        _lastSideDirection = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
                     }
 
-                    sprite.facing = lastSideDirection;
+                    sprite.facing = _lastSideDirection;
                     break;
             }
 

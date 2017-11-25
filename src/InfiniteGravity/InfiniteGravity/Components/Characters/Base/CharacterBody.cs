@@ -28,6 +28,12 @@ namespace InfiniteGravity.Components.Characters {
 
         public float actionTime = 0;
 
+        private const float attackActionDuration = 0.4f;
+
+        public float meleeComboTime = 0.05f;
+
+        public int meleeComboCount = 0;
+
         public enum ActionState {
             None,
             Interact,
@@ -167,12 +173,13 @@ namespace InfiniteGravity.Components.Characters {
 
                 if (_controller.primaryActionInput) {
                     actionState = ActionState.Melee;
-                    actionTime = 0.4f; // match animation length
+                    actionTime = attackActionDuration; // match animation length
+                    meleeComboCount = 0;
                 }
 
                 if (_controller.secondaryActionInput) {
                     actionState = ActionState.Gun;
-                    actionTime = 0.4f;
+                    actionTime = attackActionDuration;
                 }
             }
             
@@ -183,6 +190,16 @@ namespace InfiniteGravity.Components.Characters {
                     actionState = ActionState.None;
                 } else {
                     actionTime -= Time.deltaTime;
+                }
+            }
+            
+            // combos
+            if (movementState == MovementState.Attached && actionState == ActionState.Melee) {
+                if (_controller.primaryActionInput && actionTime < meleeComboTime) {
+                    // melee combo
+                    meleeComboCount++;
+                    meleeComboCount %= 3; // there are only 3 melee combo portions
+                    actionTime = attackActionDuration;
                 }
             }
         }
