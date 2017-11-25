@@ -30,7 +30,7 @@ namespace InfiniteGravity.Components.Characters {
 
         private const float attackActionDuration = 0.38f;
 
-        public float meleeComboTime = 0.05f;
+        public float meleeComboTime = 0.1f;
 
         public int meleeComboCount = 0;
 
@@ -211,7 +211,7 @@ namespace InfiniteGravity.Components.Characters {
             
             // combos
             if (movementState == MovementState.Attached && actionState == ActionState.Melee) {
-                if (_controller.primaryActionInput && actionTime < meleeComboTime) {
+                if (_controller.primaryActionInput.isPressed && actionTime < meleeComboTime) {
                     // melee combo
                     actionCombo = true;
                 }
