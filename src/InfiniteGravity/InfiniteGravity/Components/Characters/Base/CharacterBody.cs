@@ -28,7 +28,7 @@ namespace InfiniteGravity.Components.Characters {
 
         public float actionTime = 0;
 
-        private const float attackActionDuration = 0.38f;
+        private const float attackActionDuration = 0.39f;
 
         public float meleeComboTime = 0.1f;
 

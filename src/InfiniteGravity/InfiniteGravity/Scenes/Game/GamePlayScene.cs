@@ -36,6 +36,8 @@ namespace InfiniteGravity.Scenes.Game {
             // Hide cursor
             Core.instance.IsMouseVisible = false;
 
+            clearColor = new Color(147, 140, 106); // temporary background color
+
             // add fixed renderer
             var fixedRenderer =
                 addRenderer(new ScreenSpaceRenderer(1023, renderlayer_ui_overlay, renderlayer_cursor_overlay));
