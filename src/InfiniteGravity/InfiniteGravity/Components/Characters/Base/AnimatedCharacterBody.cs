@@ -12,6 +12,8 @@ namespace InfiniteGravity.Components.Characters {
             var sprite = entity.getComponent<Character>();
             var animation = Character.Animations.Idle;
 
+            // movement-based animation
+
             if (Math.Abs(angularVelocity) > 0) {
                 animation = Character.Animations.Ready;
             }
@@ -28,11 +30,26 @@ namespace InfiniteGravity.Components.Characters {
                 }
             }
 
-            if (_controller.moveDirectionInput.value.Length() > 0) {
-                lastSideDirection = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
-            }
+            // action-based animation
+            switch (actionState) {
+                case ActionState.Melee:
+                    animation = Character.Animations.Melee1;
+                    break;
+                case ActionState.Gun:
+                    animation = Character.Animations.Gun1;
+                    break;
+                default:
+                    // attack animations should never be flipped partway through
+                    
+                    // facing direction
 
-            sprite.facing = lastSideDirection;
+                    if (_controller.moveDirectionInput.value.Length() > 0) {
+                        lastSideDirection = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
+                    }
+
+                    sprite.facing = lastSideDirection;
+                    break;
+            }
 
             if (!sprite.Animation.isAnimationPlaying(animation)) {
                 sprite.Animation.play(animation);

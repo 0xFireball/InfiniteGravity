@@ -24,6 +24,17 @@ namespace InfiniteGravity.Components.Characters {
 
         public float jumpVelocity = -240f;
 
+        public ActionState actionState;
+
+        public float actionTime = 0;
+
+        public enum ActionState {
+            None,
+            Interact,
+            Melee,
+            Gun
+        };
+
         public enum MovementState {
             Free,
             Aligning,
@@ -97,7 +108,7 @@ namespace InfiniteGravity.Components.Characters {
 
             if (_controller != null) {
                 movement();
-                actionInput();
+                updateActions();
             }
         }
 
@@ -148,8 +159,32 @@ namespace InfiniteGravity.Components.Characters {
             velocity += movementVel;
         }
 
-        private void actionInput() {
-            // TODO: actions
+        private void updateActions() {
+            // TODO: Action input
+            if (actionState == ActionState.None) {
+                // no overlapping actions?
+                // TODO: Melee can cancel gun animation?
+
+                if (_controller.primaryActionInput) {
+                    actionState = ActionState.Melee;
+                    actionTime = 0.4f; // match animation length
+                }
+
+                if (_controller.secondaryActionInput) {
+                    actionState = ActionState.Gun;
+                    actionTime = 0.4f;
+                }
+            }
+            
+            // update action status
+            if (actionState != ActionState.None) {
+                if (actionTime <= 0) {
+                    // action is over
+                    actionState = ActionState.None;
+                } else {
+                    actionTime -= Time.deltaTime;
+                }
+            }
         }
     }
 }
