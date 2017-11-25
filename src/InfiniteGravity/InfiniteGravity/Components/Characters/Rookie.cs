@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using InfiniteGravity.Components.Characters.Base;
 using Nez;
 using Nez.Sprites;
 using Nez.Textures;

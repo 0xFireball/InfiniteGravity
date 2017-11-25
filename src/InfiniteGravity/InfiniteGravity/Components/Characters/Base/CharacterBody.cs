@@ -1,13 +1,9 @@
 ﻿using System;
-using System.CodeDom;
-using InfiniteGravity.Util;
 using Microsoft.Xna.Framework;
 using Nez;
-using Nez.Fuf;
 using Nez.Fuf.Physics;
-using OpenGL;
 
-namespace InfiniteGravity.Components.Characters.Base {
+namespace InfiniteGravity.Components.Characters {
     public abstract class CharacterBody : KinematicBody {
         protected CharacterController _controller;
 

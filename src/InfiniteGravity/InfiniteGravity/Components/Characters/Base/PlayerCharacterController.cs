@@ -3,7 +3,7 @@ using Nez;
 using VirtualButton = Nez.VirtualButton;
 using VirtualJoystick = Nez.VirtualJoystick;
 
-namespace InfiniteGravity.Components.Characters.Base {
+namespace InfiniteGravity.Components.Characters {
     public class PlayerCharacterController : CharacterController {
         public override void initialize() {
             base.initialize();

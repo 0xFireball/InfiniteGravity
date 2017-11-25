@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Nez;
 
-namespace InfiniteGravity.Components.Characters.Base {
+namespace InfiniteGravity.Components.Characters {
     public abstract class AnimatedCharacterBody : CharacterBody {
         private Direction lastSideDirection;
 

@@ -1,6 +1,6 @@
 ﻿using Nez.Fuf;
 
-namespace InfiniteGravity.Components.Characters.Base {
+namespace InfiniteGravity.Components.Characters {
     public class LogicCharacterController : CharacterController {
         public VirtualJoystick.LogicJoystick moveDirectionLogical { get; } = new VirtualJoystick.LogicJoystick();
         public VirtualJoystick.LogicJoystick targetDirectionLogical { get; } = new VirtualJoystick.LogicJoystick();

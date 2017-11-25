@@ -1,6 +1,6 @@
 ﻿using Nez;
 
-namespace InfiniteGravity.Components.Characters.Base {
+namespace InfiniteGravity.Components.Characters {
     public class CharacterController : Component {
         public VirtualJoystick moveDirectionInput = new VirtualJoystick(true);
         public VirtualJoystick targetDirectionInput = new VirtualJoystick(true);

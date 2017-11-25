@@ -1,7 +1,6 @@
 ﻿using System;
 using InfiniteGravity.Components.Camera;
 using InfiniteGravity.Components.Characters;
-using InfiniteGravity.Components.Characters.Base;
 using InfiniteGravity.Components.Misc;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes.Base;

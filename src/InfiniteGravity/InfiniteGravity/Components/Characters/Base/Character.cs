@@ -1,5 +1,4 @@
-﻿using InfiniteGravity.Components.Characters.Base;
-using Nez.Fuf.Sprites;
+﻿using Nez.Fuf.Sprites;
 
 namespace InfiniteGravity.Components.Characters {
     public abstract class Character : FufDeferredSprite<Character.Animations> {
