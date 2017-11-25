@@ -5,7 +5,11 @@ namespace InfiniteGravity.Components.Characters {
         public enum Animations {
             Idle,
             Ready,
-            Run
+            Run,
+            Melee1,
+            Melee2,
+            Melee3,
+            Gun1
         }
 
         public CharacterBody body;
