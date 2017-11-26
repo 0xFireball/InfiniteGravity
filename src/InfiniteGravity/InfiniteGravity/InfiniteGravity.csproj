@@ -53,6 +53,10 @@
     <Compile Include="Components\Characters\Base\CharacterController.cs" />
     <Compile Include="Components\Characters\Base\LogicCharacterController.cs" />
     <Compile Include="Components\Characters\Base\PlayerCharacterController.cs" />
+    <Compile Include="Components\Characters\Gear\Gun.cs" />
+    <Compile Include="Components\Characters\Gear\MeleeWeapon.cs" />
+    <Compile Include="Components\Characters\Gear\Sword.cs" />
+    <Compile Include="Components\Characters\Gear\Weapon.cs" />
     <Compile Include="Components\Characters\Rookie.cs" />
     <Compile Include="Components\Characters\Stats\CharacterHealthComponent.cs" />
     <Compile Include="Components\Misc\PointerCursor.cs" />

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using InfiniteGravity.Components.Characters.Gear;
+using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Sprites;
 using Nez.Textures;
@@ -7,7 +9,7 @@ using Nez.Textures;
 namespace InfiniteGravity.Components.Characters {
     public class Rookie : Character {
         public Rookie(string sprite) : base(sprite) { }
-        public Rookie() : this("rookie") {}
+        public Rookie() : this("rookie") { }
 
         protected override void loadSprites() {
             loadGraphic($"Sprites/Characters/{spriteAsset}", true, 128, 128);
@@ -62,9 +64,15 @@ namespace InfiniteGravity.Components.Characters {
             setFacingFlip(true, false);
 
             facing = Direction.Right;
-            
+
             body = entity.addComponent(new RookieBody {
                 bodyCollider = entity.addComponent(new BoxCollider(-4, -8, 10, 24))
+            });
+
+            // gear
+            entity.addComponent(new Sword(new Vector2(4, -8), new Rectangle(4, -4, 28, 14)));
+            entity.addComponent(new Gun(new Vector2(6, -8)) {
+                range = 400f
             });
         }
 

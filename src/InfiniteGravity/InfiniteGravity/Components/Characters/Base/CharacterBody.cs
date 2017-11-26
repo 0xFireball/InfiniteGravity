@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using InfiniteGravity.Components.Characters.Gear;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Fuf.Physics;
@@ -31,13 +32,16 @@ namespace InfiniteGravity.Components.Characters {
         /// </summary>
         public float actionTime = 0;
 
+        // Actions
+
+        public bool actionCombo = false;
+
         private const float attackActionDuration = 0.38f;
 
+        // Melee weapon
         public float meleeComboTime = 0.1f;
 
         public int meleeComboCount = 0;
-
-        public bool actionCombo = false;
 
         public Collider bodyCollider;
 
@@ -86,16 +90,16 @@ namespace InfiniteGravity.Components.Characters {
 
             // collision
             collisionResults.Clear();
-            
+
             if (bodyCollider.collidesWithAnyMultiple(physicsDeltaMovement, collisionResults)) {
                 for (var i = 0; i < collisionResults.Count; i++) {
                     var result = collisionResults[i];
-                    
+
                     // check if touching tilemap
                     if (result.collider.entity.getComponent<TiledMapComponent>() != null) {
                         // TODO: Set touching flags
                         // TODO: collision against map collision layer, cancel velocity
-                        
+
                         // accept hard movement adjustment
                         physicsDeltaMovement -= result.minimumTranslationVector;
 
@@ -143,6 +147,14 @@ namespace InfiniteGravity.Components.Characters {
                    (float) (Math.PI / 2f);
         }
 
+        protected void transformBySurfaceAngle(ref Vector2 vec) {
+            vec = Vector2Ext.transform(vec, Matrix2D.createRotation(calculateSurfaceAngle()));
+        }
+
+        protected void transformByRotation(ref Vector2 vec) {
+            vec = Vector2Ext.transform(vec, Matrix2D.createRotation(entity.transform.localRotation));
+        }
+
         private void movement() {
             var movementVel = Vector2.Zero;
 
@@ -150,17 +162,16 @@ namespace InfiniteGravity.Components.Characters {
 
             if (movementState == MovementState.Attached) {
                 // attached, run along the surface
-                var surfaceAngle = calculateSurfaceAngle();
                 if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
                     var run = new Vector2(_controller.moveDirectionInput.value.X, 0) * movementSpeed;
-                    run = Vector2Ext.transform(run, Matrix2D.createRotation(surfaceAngle));
+                    transformBySurfaceAngle(ref run);
                     // run = MathUtils.cartesianToScreenSpace(run);
                     velocity += run;
                 }
                 // jump off the surface
                 if (_controller.thrustInput > 0) {
                     var jump = new Vector2(0, jumpVelocity);
-                    jump = Vector2Ext.transform(jump, Matrix2D.createRotation(surfaceAngle));
+                    transformBySurfaceAngle(ref jump);
                     attachedSurfaceNormal = Vector2.Zero;
                     velocity += jump;
                 }
@@ -176,10 +187,10 @@ namespace InfiniteGravity.Components.Characters {
 
             if (_controller.thrustInput < 0) {
                 var fall = new Vector2(0, _controller.thrustInput * -fallThrust);
-                fall = Vector2Ext.transform(fall, Matrix2D.createRotation(entity.transform.localRotation));
+                transformByRotation(ref fall);
                 velocity += fall;
             }
-            
+
             // facing
             if (_controller.moveDirectionInput.value.Length() > 0) {
                 lastFacing = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
@@ -205,9 +216,10 @@ namespace InfiniteGravity.Components.Characters {
                 if (_controller.secondaryActionInput) {
                     actionState = ActionState.Gun;
                     actionTime = attackActionDuration;
+                    hitGun();
                 }
             }
-            
+
             // update action status
             if (actionState != ActionState.None) {
                 if (actionTime <= 0) {
@@ -231,7 +243,7 @@ namespace InfiniteGravity.Components.Characters {
                     actionTime -= Time.deltaTime;
                 }
             }
-            
+
             // combos
             if (movementState == MovementState.Attached && actionState == ActionState.Melee) {
                 if (_controller.primaryActionInput.isPressed && actionTime < meleeComboTime) {
@@ -243,8 +255,40 @@ namespace InfiniteGravity.Components.Characters {
 
         private void hitMelee() {
             // perform a melee hit
-            var swordCollider = new BoxCollider();
-//            this.getComponent<Collider>().
+            var meleeWeapon = entity.getComponent<MeleeWeapon>();
+            var dir = lastFacing == Direction.Right ? 1 : -1;
+            var facingFlipScale = new Vector2(dir, 1);
+            var offset = meleeWeapon.offset;
+            offset = Vector2Ext.transform(offset, Matrix2D.createScale(facingFlipScale));
+            var reach = meleeWeapon.reach;
+            // reflect X based on direction
+            RectangleExt.scale(ref reach, facingFlipScale);
+//            var swordCollider = new BoxCollider(offset.X + reach.X,
+//               offset.Y + reach.Y, reach.Width, reach.Height);
+            var swordCollider = new BoxCollider(0, 0, reach.Width, reach.Height);
+            swordCollider.localOffset = new Vector2(offset.X + reach.X + reach.Width / 2f, offset.Y + reach.Y + reach.Height / 2f);
+            entity.addComponent(swordCollider);
+            collisionResults.Clear();
+            swordCollider.collidesWithAnyMultiple(Vector2.Zero, collisionResults);
+            
+            entity.removeComponent(swordCollider);
+        }
+
+        private void hitGun() {
+            // perform a gun hit
+            var gunWeapon = entity.getComponent<Gun>();
+            var dir = lastFacing == Direction.Right ? 1 : -1;
+            var facingFlipScale = new Vector2(dir, 1);
+            var offset = gunWeapon.offset;
+            offset = Vector2Ext.transform(offset, Matrix2D.createScale(facingFlipScale));
+            transformByRotation(ref offset);
+            var gunPos = offset + entity.position;
+            // draw a line from the gun starting point
+            var gunDirection = new Vector2(dir, 0);
+            transformByRotation(ref gunDirection);
+            var bulletTravel = gunDirection * gunWeapon.range;
+            // TODO: Inaccuracy/spread
+            var hit = Physics.linecast(gunPos, gunPos + bulletTravel);
         }
     }
 }
