@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Nez;
 
 namespace InfiniteGravity.Scenes.Base {
     public class BaseGameScene : Scene {
         protected const int renderlayer_background = 256;
         protected const int renderlayer_foreground = 0;
-        
+
         private Color bgColor = new Color(40, 40, 40);
 
         protected bool _active = true;
@@ -23,7 +24,7 @@ namespace InfiniteGravity.Scenes.Base {
         }
 
         protected void switchSceneFade<TScene>(float duration = 0.5f) where TScene : BaseGameScene, new() {
-            if (_active) {
+            if (_active && !Core.instance.inScreenTransition) {
                 _active = false;
                 Core.startSceneTransition(new CrossFadeTransition(() => new TScene()) {
                     fadeDuration = duration
