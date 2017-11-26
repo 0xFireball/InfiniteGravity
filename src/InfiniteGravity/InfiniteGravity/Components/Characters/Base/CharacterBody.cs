@@ -13,7 +13,6 @@ namespace InfiniteGravity.Components.Characters {
         public float fallThrust = 40.0f;
 
         public Vector2 attachedSurfaceNormal = Vector2.Zero;
-        public float attachmentSlowdown = 12;
 
         public float surfaceAlignAngleVariance = (float) Math.PI / 6f;
         public float surfaceAttachEpsilon = (float) Math.PI / 64f;
