@@ -59,7 +59,16 @@ namespace InfiniteGravity.Components.Characters {
             Attached
         }
 
+        public enum BodyState {
+            Normal,
+            Hurt
+        }
+
+        public float bodyStateTime;
+
         public MovementState movementState = MovementState.Free;
+        
+        public BodyState bodyState;
 
         public Direction lastFacing;
 
@@ -139,6 +148,7 @@ namespace InfiniteGravity.Components.Characters {
             if (_controller != null) {
                 movement();
                 updateActions();
+                updateBody();
             }
         }
 
@@ -250,6 +260,14 @@ namespace InfiniteGravity.Components.Characters {
                     // melee combo
                     actionCombo = true;
                 }
+            }
+        }
+
+        private void updateBody() {
+            if (bodyStateTime <= 0) {
+                bodyState = BodyState.Normal;
+            } else {
+                bodyStateTime -= Time.deltaTime;
             }
         }
 

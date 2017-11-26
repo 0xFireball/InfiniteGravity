@@ -59,6 +59,13 @@ namespace InfiniteGravity.Components.Characters {
                 _subtextures[20],
                 _subtextures[21]
             }) {fps = animationFps});
+            
+            Animation.addAnimation(Animations.Hurt1, new SpriteAnimation(new List<Subtexture> {
+                _subtextures[22],
+                _subtextures[23],
+                _subtextures[24],
+                _subtextures[25]
+            }) {fps = animationFps});
 
             // flip X based on facing direction
             setFacingFlip(true, false);

@@ -28,6 +28,13 @@ namespace InfiniteGravity.Components.Characters {
                     animation = Character.Animations.Run;
                 }
             }
+            
+            // body-based animation
+            switch (bodyState) {
+                case BodyState.Hurt:
+                    animation = Character.Animations.Hurt1;
+                    break;
+            }
 
             // action-based animation
             switch (actionState) {

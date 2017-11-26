@@ -9,7 +9,8 @@ namespace InfiniteGravity.Components.Characters {
             Melee1,
             Melee2,
             Melee3,
-            Gun1
+            Gun1,
+            Hurt1,
         }
 
         public CharacterBody body;
