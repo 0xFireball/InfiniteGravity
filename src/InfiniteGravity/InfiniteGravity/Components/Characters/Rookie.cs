@@ -84,9 +84,7 @@ namespace InfiniteGravity.Components.Characters {
         }
 
         public class RookieBody : AnimatedCharacterBody {
-            public override void initialize() {
-                base.initialize();
-
+            public RookieBody() {
                 movementSpeed = 240f;
             }
         }

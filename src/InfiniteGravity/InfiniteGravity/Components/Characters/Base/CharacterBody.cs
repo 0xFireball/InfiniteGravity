@@ -72,9 +72,7 @@ namespace InfiniteGravity.Components.Characters {
 
         public Direction lastFacing;
 
-        public override void initialize() {
-            base.initialize();
-
+        protected CharacterBody() {
             maxAngular = (float) Math.PI * 0.2f;
             angularDrag = (float) Math.PI * 0.3f;
 
