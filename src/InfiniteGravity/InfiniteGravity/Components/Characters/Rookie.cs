@@ -77,7 +77,7 @@ namespace InfiniteGravity.Components.Characters {
             public override void initialize() {
                 base.initialize();
 
-                movementSpeed = 210f;
+                movementSpeed = 240f;
             }
         }
     }

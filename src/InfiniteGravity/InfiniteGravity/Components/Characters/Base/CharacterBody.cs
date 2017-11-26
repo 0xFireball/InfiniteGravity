@@ -8,7 +8,7 @@ namespace InfiniteGravity.Components.Characters {
     public abstract class CharacterBody : KinematicBody {
         protected CharacterController _controller;
 
-        public float movementSpeed = 120.0f;
+        public float movementSpeed = 240.0f;
         public float angularThrust = (float) Math.PI * 0.4f;
         public float fallThrust = 40.0f;
 
@@ -20,7 +20,7 @@ namespace InfiniteGravity.Components.Characters {
         public float surfaceAlignLerp = 0.2f;
 
         public float baseDrag = 0f;
-        public float surfaceDrag = 100f;
+        public float surfaceDrag = 200f;
 
         public float jumpVelocity = -240f;
 
