@@ -288,6 +288,15 @@ namespace InfiniteGravity.Components.Characters {
             entity.addComponent(swordCollider);
             collisionResults.Clear();
             swordCollider.collidesWithAnyMultiple(Vector2.Zero, collisionResults);
+
+            for (var i = 0; i < collisionResults.Count; i++) {
+                var result = collisionResults[i];
+
+                var character = result.collider?.entity.getComponent<Character>();
+                if (character != null) {
+                    character.body.hurt();
+                }
+            }
             
             entity.removeComponent(swordCollider);
         }
@@ -307,6 +316,16 @@ namespace InfiniteGravity.Components.Characters {
             var bulletTravel = gunDirection * gunWeapon.range;
             // TODO: Inaccuracy/spread
             var hit = Physics.linecast(gunPos, gunPos + bulletTravel);
+
+            var character = hit.collider?.entity.getComponent<Character>();
+            if (character != null) {
+                character.body.hurt();
+            }
+        }
+
+        private void hurt() {
+            bodyState = BodyState.Hurt;
+            bodyStateTime = 0.38f;
         }
     }
 }
