@@ -24,6 +24,8 @@ namespace InfiniteGravity.Components.Characters {
 
             targetDirectionInput.nodes.Add(new VirtualJoystick.GamePadRightStick());
             targetDirectionInput.nodes.Add(new Nez.Fuf.VirtualJoystick.MouseDirectionalJoystick(entity.scene.camera));
+            
+            aimActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.D));
         }
     }
 }

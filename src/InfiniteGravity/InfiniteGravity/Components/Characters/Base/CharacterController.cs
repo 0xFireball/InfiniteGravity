@@ -9,5 +9,7 @@ namespace InfiniteGravity.Components.Characters {
         
         public VirtualButton primaryActionInput = new VirtualButton();
         public VirtualButton secondaryActionInput = new VirtualButton();
+        
+        public VirtualButton aimActionInput = new VirtualButton();
     }
 }

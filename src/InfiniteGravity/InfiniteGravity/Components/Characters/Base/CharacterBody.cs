@@ -192,7 +192,7 @@ namespace InfiniteGravity.Components.Characters {
 
             if (movementState == MovementState.Attached) {
                 // attached, run along the surface
-                if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
+                if (Math.Abs(_controller.moveDirectionInput.value.X) > 0 && !_controller.aimActionInput) {
                     var run = new Vector2(_controller.moveDirectionInput.value.X, 0) * movementSpeed;
                     transformBySurfaceAngle(ref run);
                     // run = MathUtils.cartesianToScreenSpace(run);
@@ -207,7 +207,7 @@ namespace InfiniteGravity.Components.Characters {
                 }
             } else {
                 // jetpack steering
-                if (movementState == MovementState.Free) {
+                if (movementState == MovementState.Free && !_controller.aimActionInput) {
                     if (Math.Abs(_controller.moveDirectionInput.value.X) > 0) {
                         var turn = _controller.moveDirectionInput.value.X * angularThrust;
                         angularVelocity += turn;
