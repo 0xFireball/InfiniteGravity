@@ -6,7 +6,8 @@ using Nez.Textures;
 
 namespace InfiniteGravity.Components.Characters {
     public class Rookie : Character {
-        public Rookie() : base("rookie") { }
+        public Rookie(string sprite) : base(sprite) { }
+        public Rookie() : this("rookie") {}
 
         protected override void loadSprites() {
             loadGraphic($"Sprites/Characters/{spriteAsset}", true, 128, 128);

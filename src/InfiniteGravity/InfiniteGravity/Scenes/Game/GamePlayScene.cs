@@ -54,6 +54,11 @@ namespace InfiniteGravity.Scenes.Game {
                 new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
             player.addComponent<Rookie>();
             player.addComponent<PlayerCharacterController>();
+            
+            // dummy
+            var dummy = createEntity("dummy", new Vector2(916, 560));
+            dummy.addComponent<AntiRookie>();
+            dummy.addComponent<LogicCharacterController>();
 
             // map
             var mapEntity = createEntity("map_tiles");
