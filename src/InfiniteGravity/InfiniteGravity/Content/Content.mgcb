@@ -132,3 +132,8 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Characters/anti_rookie.png
 
+#begin Particles/jetpack.fpx
+/importer:FufParticleCreatorImporter
+/processor:FufParticleCreatorProcessor
+/build:Particles/jetpack.fpx
+

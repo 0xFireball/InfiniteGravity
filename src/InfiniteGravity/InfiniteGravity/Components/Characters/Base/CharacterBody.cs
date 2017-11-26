@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using InfiniteGravity.Components.Characters.Gear;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Nez.ECS.Components.Renderables.Particles;
 using Nez.Fuf.Physics;
+using Nez.Textures;
 
 namespace InfiniteGravity.Components.Characters {
     public abstract class CharacterBody : KinematicBody {
@@ -72,11 +75,20 @@ namespace InfiniteGravity.Components.Characters {
 
         public Direction lastFacing;
 
+        public FufParticleEmitter jetpackEmitter;
+
         protected CharacterBody() {
             maxAngular = (float) Math.PI * 0.2f;
             angularDrag = (float) Math.PI * 0.3f;
 
             maxVelocity = new Vector2(fallThrust * 2);
+        }
+
+        public override void initialize() {
+            base.initialize();
+
+            jetpackEmitter = entity.addComponent(new FufParticleEmitter(Core.content.Load<FufParticleCreatorConfig>("Particles/jetpack"), 40));
+            jetpackEmitter.play(20f);
         }
 
         public override void onAddedToEntity() {
@@ -113,7 +125,7 @@ namespace InfiniteGravity.Components.Characters {
                         var halfPi = ((float) Math.PI / 2);
 
                         var upward = new Vector2(0, -1);
-                        upward = Vector2Ext.transform(upward, Matrix2D.createRotation(angle));
+                        transformByRotation(ref upward);
 
                         var normalAngle = Mathf.atan2(result.normal.Y, result.normal.X);
 
@@ -148,6 +160,16 @@ namespace InfiniteGravity.Components.Characters {
                 updateActions();
                 updateBody();
             }
+
+            updateCosmetic();
+        }
+
+        private void updateCosmetic() {
+            // update particle emitter
+            var emitterDirection = new Vector2(0, -1);
+            transformByRotation(ref emitterDirection);
+            var emitterAngle = Mathf.atan2(emitterDirection.Y, emitterDirection.X);
+            jetpackEmitter.emitterConfig.launchAngle.setMidpoint(Mathf.rad2Deg * emitterAngle);
         }
 
         protected float calculateSurfaceAngle() {
@@ -193,10 +215,14 @@ namespace InfiniteGravity.Components.Characters {
                 }
             }
 
+            // downward thrust
             if (_controller.thrustInput < 0) {
                 var fall = new Vector2(0, _controller.thrustInput * -fallThrust);
                 transformByRotation(ref fall);
                 velocity += fall;
+                jetpackEmitter.resume();
+            } else {
+                jetpackEmitter.pause();
             }
 
             // facing

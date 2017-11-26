@@ -1,0 +1,61 @@
+{
+  "texture": "jetpack_tex.png",
+  "speed": {
+    "min": 80,
+    "max": 160
+  },
+  "launchAngle": {
+	"min": -10,
+	"max": 10
+  },
+  "offset": {
+    "min": {
+      "X": -5.0, "Y": 5.0
+    },
+    "max": {
+      "X": 5.0, "Y": 5.0
+    }
+  },
+  "alpha": {
+    "start": {
+      "min": 0.9,
+      "max": 1.0
+    },
+    "end": {
+      "min": 0.0,
+      "max": 0.1
+    }
+  },
+  "scale": {
+    "start": {
+      "min": 4.0,
+      "max": 4.0
+    },
+    "end": {
+      "min": 5.0,
+      "max": 6.0
+    }
+  },
+  "color": {
+    "start": {
+      "min": {
+        "red": 0.6, "green": 0.6, "blue": 0.6, "alpha": 0.4
+      },
+      "max": {
+        "red": 0.6, "green": 0.6, "blue": 0.6, "alpha": 0.4
+      }
+    },
+    "end": {
+      "min": {
+        "red": 0.9, "green": 0.9, "blue": 0.9, "alpha": 0.9
+      },
+      "max": {
+        "red": 0.9, "green": 0.9, "blue": 0.9, "alpha": 0.9
+      }
+    }
+  },
+  "life": {
+    "min": 0.2,
+    "max": 0.6
+  }
+}
