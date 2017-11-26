@@ -59,6 +59,7 @@ namespace InfiniteGravity.Scenes.Game {
             var dummy = createEntity("dummy", new Vector2(916, 560));
             dummy.addComponent<AntiRookie>();
             dummy.addComponent<LogicCharacterController>();
+            dummy.localRotation = -Mathf.PI / 2;
 
             // map
             var mapEntity = createEntity("map_tiles");

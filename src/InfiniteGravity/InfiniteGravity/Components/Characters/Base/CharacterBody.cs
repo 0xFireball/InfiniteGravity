@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Fuf.Physics;
@@ -67,6 +68,8 @@ namespace InfiniteGravity.Components.Characters {
             _controller = entity.getComponent<CharacterController>();
         }
 
+        private List<CollisionResult> collisionResults = new List<CollisionResult>();
+
         public override Vector2 applyMotion(Vector2 posDelta) {
             var physicsDeltaMovement = posDelta;
 
@@ -76,35 +79,43 @@ namespace InfiniteGravity.Components.Characters {
             movementState = MovementState.Free;
 
             // collision
-            if (entity.getComponent<BoxCollider>().collidesWithAny(ref physicsDeltaMovement, out var result)) {
-                // check if touching tilemap
-                if (result.collider.entity.getComponent<TiledMapComponent>() != null) {
-                    entity.position -= result.minimumTranslationVector;
-                    // TODO: Set touching flags
-                    // TODO: collision against map collision layer, cancel velocity
+            collisionResults.Clear();
+            
+            if (entity.getComponent<BoxCollider>().collidesWithAnyMultiple(physicsDeltaMovement, collisionResults)) {
+                for (var i = 0; i < collisionResults.Count; i++) {
+                    var result = collisionResults[i];
+                    
+                    // check if touching tilemap
+                    if (result.collider.entity.getComponent<TiledMapComponent>() != null) {
+                        // TODO: Set touching flags
+                        // TODO: collision against map collision layer, cancel velocity
+                        
+                        // accept hard movement adjustment
+                        physicsDeltaMovement -= result.minimumTranslationVector;
 
-                    var halfPi = ((float) Math.PI / 2);
+                        var halfPi = ((float) Math.PI / 2);
 
-                    var upward = new Vector2(0, -1);
-                    upward = Vector2Ext.transform(upward, Matrix2D.createRotation(angle));
+                        var upward = new Vector2(0, -1);
+                        upward = Vector2Ext.transform(upward, Matrix2D.createRotation(angle));
 
-                    var normalAngle = Mathf.atan2(result.normal.Y, result.normal.X);
+                        var normalAngle = Mathf.atan2(result.normal.Y, result.normal.X);
 
-                    var angleToNormal = Math.Abs(Mathf.acos(Vector2.Dot(upward, result.normal)));
+                        var angleToNormal = Math.Abs(Mathf.acos(Vector2.Dot(upward, result.normal)));
 
-                    if (angleToNormal < surfaceAlignAngleVariance) {
-                        var targetAngle = (normalAngle + halfPi) % (Mathf.PI * 2);
-                        if (angleToNormal < surfaceAttachEpsilon) {
-                            attachedSurfaceNormal = result.normal;
-                            angle = targetAngle;
-                            movementState = MovementState.Attached;
-                        } else {
-                            // angle closer to the target
-                            var currentAngle = angle % (Mathf.PI * 2);
-                            angle = Mathf.lerpAngle(currentAngle, targetAngle, surfaceAlignLerp);
-                            movementState = MovementState.Aligning;
+                        if (angleToNormal < surfaceAlignAngleVariance) {
+                            var targetAngle = (normalAngle + halfPi) % (Mathf.PI * 2);
+                            if (angleToNormal < surfaceAttachEpsilon) {
+                                attachedSurfaceNormal = result.normal;
+                                angle = targetAngle;
+                                movementState = MovementState.Attached;
+                            } else {
+                                // angle closer to the target
+                                var currentAngle = angle % (Mathf.PI * 2);
+                                angle = Mathf.lerpAngle(currentAngle, targetAngle, surfaceAlignLerp);
+                                movementState = MovementState.Aligning;
+                            }
+                            drag = new Vector2(surfaceDrag);
                         }
-                        drag = new Vector2(surfaceDrag);
                     }
                 }
             }
