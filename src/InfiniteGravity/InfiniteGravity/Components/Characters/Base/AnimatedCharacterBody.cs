@@ -4,7 +4,6 @@ using Nez;
 
 namespace InfiniteGravity.Components.Characters {
     public abstract class AnimatedCharacterBody : CharacterBody {
-        private Direction _lastSideDirection;
 
         public override void update() {
             base.update();
@@ -46,11 +45,7 @@ namespace InfiniteGravity.Components.Characters {
 
                     // facing direction
 
-                    if (_controller.moveDirectionInput.value.Length() > 0) {
-                        _lastSideDirection = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
-                    }
-
-                    sprite.facing = _lastSideDirection;
+                    sprite.facing = lastFacing;
                     break;
             }
 

@@ -26,6 +26,9 @@ namespace InfiniteGravity.Components.Characters {
 
         public ActionState actionState;
 
+        /// <summary>
+        /// Timer for current action (time remaining)
+        /// </summary>
         public float actionTime = 0;
 
         private const float attackActionDuration = 0.38f;
@@ -35,6 +38,8 @@ namespace InfiniteGravity.Components.Characters {
         public int meleeComboCount = 0;
 
         public bool actionCombo = false;
+
+        public Collider bodyCollider;
 
         public enum ActionState {
             None,
@@ -51,6 +56,8 @@ namespace InfiniteGravity.Components.Characters {
         }
 
         public MovementState movementState = MovementState.Free;
+
+        public Direction lastFacing;
 
         public override void initialize() {
             base.initialize();
@@ -80,7 +87,7 @@ namespace InfiniteGravity.Components.Characters {
             // collision
             collisionResults.Clear();
             
-            if (entity.getComponent<BoxCollider>().collidesWithAnyMultiple(physicsDeltaMovement, collisionResults)) {
+            if (bodyCollider.collidesWithAnyMultiple(physicsDeltaMovement, collisionResults)) {
                 for (var i = 0; i < collisionResults.Count; i++) {
                     var result = collisionResults[i];
                     
@@ -167,11 +174,15 @@ namespace InfiniteGravity.Components.Characters {
                 }
             }
 
-
             if (_controller.thrustInput < 0) {
                 var fall = new Vector2(0, _controller.thrustInput * -fallThrust);
                 fall = Vector2Ext.transform(fall, Matrix2D.createRotation(entity.transform.localRotation));
                 velocity += fall;
+            }
+            
+            // facing
+            if (_controller.moveDirectionInput.value.Length() > 0) {
+                lastFacing = _controller.moveDirectionInput.value.X > 0 ? Direction.Right : Direction.Left;
             }
 
             // TODO: movement
@@ -188,6 +199,7 @@ namespace InfiniteGravity.Components.Characters {
                     actionState = ActionState.Melee;
                     actionTime = attackActionDuration; // match animation length
                     meleeComboCount = 0;
+                    hitMelee();
                 }
 
                 if (_controller.secondaryActionInput) {
@@ -205,6 +217,7 @@ namespace InfiniteGravity.Components.Characters {
                             // melee combo
                             meleeComboCount++;
                             actionTime = attackActionDuration;
+                            hitMelee();
                         }
                     } else if (actionState == ActionState.Cooldown) {
                         // action is over
@@ -226,6 +239,12 @@ namespace InfiniteGravity.Components.Characters {
                     actionCombo = true;
                 }
             }
+        }
+
+        private void hitMelee() {
+            // perform a melee hit
+            var swordCollider = new BoxCollider();
+//            this.getComponent<Collider>().
         }
     }
 }

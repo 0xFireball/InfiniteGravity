@@ -15,11 +15,5 @@ namespace InfiniteGravity.Components.Characters {
         public CharacterBody body;
 
         protected Character(string spriteAsset) : base(spriteAsset) { }
-
-        public override void initialize() {
-            base.initialize();
-            
-            // TODO
-        }
     }
 }

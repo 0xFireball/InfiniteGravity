@@ -62,15 +62,10 @@ namespace InfiniteGravity.Components.Characters {
             setFacingFlip(true, false);
 
             facing = Direction.Right;
-
-            // TODO: Collision
-            entity.addComponent(new BoxCollider(-4, -8, 10, 24));
-        }
-
-        public override void initialize() {
-            base.initialize();
-
-            body = entity.addComponent<RookieBody>();
+            
+            body = entity.addComponent(new RookieBody {
+                bodyCollider = entity.addComponent(new BoxCollider(-4, -8, 10, 24))
+            });
         }
 
         public class RookieBody : AnimatedCharacterBody {
