@@ -70,7 +70,7 @@ namespace InfiniteGravity.Components.Characters {
         public float bodyStateTime;
 
         public MovementState movementState = MovementState.Free;
-        
+
         public BodyState bodyState;
 
         public Direction lastFacing;
@@ -87,7 +87,9 @@ namespace InfiniteGravity.Components.Characters {
         public override void initialize() {
             base.initialize();
 
-            jetpackEmitter = entity.addComponent(new FufParticleEmitter(Core.content.Load<FufParticleCreatorConfig>("Particles/jetpack"), 40));
+            jetpackEmitter =
+                entity.addComponent(
+                    new FufParticleEmitter(Core.content.Load<FufParticleCreatorConfig>("Particles/jetpack"), 40));
             jetpackEmitter.play(20f);
         }
 
@@ -308,7 +310,8 @@ namespace InfiniteGravity.Components.Characters {
 //            var swordCollider = new BoxCollider(offset.X + reach.X,
 //               offset.Y + reach.Y, reach.Width, reach.Height);
             var swordCollider = new BoxCollider(0, 0, reach.Width, reach.Height);
-            swordCollider.localOffset = new Vector2(offset.X + reach.X + reach.Width / 2f, offset.Y + reach.Y + reach.Height / 2f);
+            swordCollider.localOffset = new Vector2(offset.X + reach.X + reach.Width / 2f,
+                offset.Y + reach.Y + reach.Height / 2f);
             entity.addComponent(swordCollider);
             collisionResults.Clear();
             swordCollider.collidesWithAnyMultiple(Vector2.Zero, collisionResults);
@@ -318,10 +321,10 @@ namespace InfiniteGravity.Components.Characters {
 
                 var character = result.collider?.entity.getComponent<Character>();
                 if (character != null) {
-                    character.body.hurt();
+                    hurtCharacter(character);
                 }
             }
-            
+
             entity.removeComponent(swordCollider);
         }
 
@@ -343,13 +346,19 @@ namespace InfiniteGravity.Components.Characters {
 
             var character = hit.collider?.entity.getComponent<Character>();
             if (character != null) {
-                character.body.hurt();
+                hurtCharacter(character);
             }
+        }
+
+        private void hurtCharacter(Character character) {
+            character.body.hurt();
         }
 
         private void hurt() {
             bodyState = BodyState.Hurt;
             bodyStateTime = 0.38f;
+            
+            // TODO: Health effect
         }
     }
 }
