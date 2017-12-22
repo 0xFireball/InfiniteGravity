@@ -91,10 +91,13 @@ namespace InfiniteGravity.Scenes.Game {
                 if (paused) {
                     removeRenderer(pauseRenderer);
                     Time.timeScale = 1f;
+                    
                 } else {
                     addRenderer(pauseRenderer);
                     Time.timeScale = 0f;
                 }
+                this.entities.getList().ForEach(x =>
+                    x.components.getComponents<IUpdatable>().ForEach(y => y.active = paused));
                 paused = !paused;
             }
         }
