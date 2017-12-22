@@ -54,10 +54,10 @@ namespace InfiniteGravity.Scenes.Game {
                 new Vector2(Core.instance.defaultResolution.X / 2f, y: Core.instance.defaultResolution.Y / 2f));
             player.addComponent<Rookie>();
             player.addComponent<PlayerCharacterController>();
-            
+
             // dummy
             var dummy = createEntity("dummy", new Vector2(916, 560));
-            dummy.addComponent<AntiRookie>();
+            dummy.addComponent<Rookie>();
             dummy.addComponent<LogicCharacterController>();
             dummy.localRotation = -Mathf.PI / 2;
 
@@ -67,7 +67,7 @@ namespace InfiniteGravity.Scenes.Game {
             var mapComponent = mapEntity.addComponent(new TiledMapComponent(mapAsset, "blocks"));
             // map behind everything
             mapComponent.renderLayer = renderlayer_background;
-            
+
             // add component to make camera follow the player
             var lockedCamera = camera.entity.addComponent(new LockedCamera(player, camera));
 
