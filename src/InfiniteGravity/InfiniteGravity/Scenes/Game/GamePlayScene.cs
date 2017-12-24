@@ -96,8 +96,14 @@ namespace InfiniteGravity.Scenes.Game {
                     addRenderer(pauseRenderer);
                     Time.timeScale = 0f;
                 }
-                this.entities.getList().ForEach(x =>
-                    x.components.getComponents<IUpdatable>().ForEach(y => y.active = paused));
+                foreach (var entity in entities.getList()) {
+                    if (entity.getComponent<MouseFollow>() != null) { // don't freeze mouse handler
+                        continue;
+                    }
+                    foreach (var component in entity.components.getComponents<IUpdatable>()) {
+                        component.active = paused;
+                    }
+                }
                 paused = !paused;
             }
         }
