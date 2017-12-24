@@ -1,0 +1,1 @@
+magick rookie.png -scale 400% rookie.png
