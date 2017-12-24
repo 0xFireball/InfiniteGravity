@@ -1,8 +1,9 @@
-﻿using System.Runtime.Remoting.Contexts;
+﻿using System.IO;
+using FFAssetPack;
 using InfiniteGravity.Assets;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes;
-using Microsoft.Xna.Framework.Graphics;
+using MGLayers;
 using Nez;
 using Nez.Fuf;
 
@@ -13,6 +14,8 @@ namespace InfiniteGravity {
 
         public const string GameTitle = "InfiniteGravity";
         public const string GameVersion = "0.1.001 dev";
+
+        public const string PackedContentFile = "PackedContent.pak";
 
         private readonly GameContext gameContext;
 
@@ -32,11 +35,19 @@ namespace InfiniteGravity {
 
             Window.Title = GameTitle;
             Window.AllowUserResizing = false;
-            
+
 //            Core.defaultSamplerState = gameContext.configuration.graphics.antialiasing ? SamplerState.LinearClamp : SamplerState.PointClamp;
 
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;
+
+            // Set content sources
+            if (File.Exists(PackedContentFile)) {
+                contentSource.addContentSource(
+                    new PakFileContentSource(new PakFile(File.OpenRead(PackedContentFile))), 0);
+            }
+
+            contentSource.addContentSource(new DirectoryContentSource(content.RootDirectory), 1);
 
             // Register code assets
             services.AddService(typeof(UiAssets), new UiAssets());
@@ -49,6 +60,7 @@ namespace InfiniteGravity {
                 GameConfiguration.GraphicsConfiguration.ScaleMode.Stretch) {
                 resolutionPolicy = Scene.SceneResolutionPolicy.BestFit;
             }
+
             Scene.setDefaultDesignResolution(defaultResolution.X, defaultResolution.Y, resolutionPolicy);
 
             var introScene = new IntroScene();
