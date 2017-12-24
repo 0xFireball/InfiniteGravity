@@ -5,6 +5,7 @@ using InfiniteGravity.Scenes.Game;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
+using Nez.Fuf;
 using Nez.Fuf.UI;
 using Nez.UI;
 
@@ -26,7 +27,7 @@ namespace InfiniteGravity.Scenes.Menu {
 
             var gameContext = Core.services.GetService<GameContext>();
 
-            var uiSkin = new Skin("UI/Skins/menu_skin", Core.content);
+            var uiSkin = new Skin("UI/Skins/menu_skin", FufCore.contentSource);
             var menuButtonDimens = new Vector2(160, 42);
             var menuButtonPadding = 2;
             var menuGroupComposer =

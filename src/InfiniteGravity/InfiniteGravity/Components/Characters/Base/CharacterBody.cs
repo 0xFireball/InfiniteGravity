@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.ECS.Components.Renderables.Particles;
+using Nez.Fuf;
 using Nez.Fuf.Physics;
 using Nez.Textures;
 
@@ -89,7 +90,7 @@ namespace InfiniteGravity.Components.Characters {
 
             jetpackEmitter =
                 entity.addComponent(
-                    new FufParticleEmitter(Core.content.Load<FufParticleCreatorConfig>("Particles/jetpack"), 40));
+                    new FufParticleEmitter(FufCore.contentSource.Load<FufParticleCreatorConfig>("Particles/jetpack"), 40));
             jetpackEmitter.play(20f);
         }
 

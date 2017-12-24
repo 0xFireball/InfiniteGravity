@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.BitmapFonts;
+using Nez.Fuf;
 using Nez.UI;
 
 namespace InfiniteGravity.Assets {
@@ -15,10 +16,10 @@ namespace InfiniteGravity.Assets {
         public NezSpriteFont DisposableDroid { get; }
 
         public UiAssets() {
-            DisposableDroidLarge = new NezSpriteFont(Core.content.Load<SpriteFont>("Fonts/disposable_droid_lg"));
-            DisposableDroid = new NezSpriteFont(Core.content.Load<SpriteFont>("Fonts/disposable_droid"));
+            DisposableDroidLarge = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/disposable_droid_lg"));
+            DisposableDroid = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/disposable_droid"));
 
-            PixeledBMFont = Core.content.Load<BitmapFont>("Fonts/bm_pixeled");
+            PixeledBMFont = FufCore.contentSource.Load<BitmapFont>("Fonts/bm_pixeled");
 
             const int buttonColorVal = 60;
             TextButtonStyle = new TextButtonStyle(

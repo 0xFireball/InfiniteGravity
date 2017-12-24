@@ -4,6 +4,7 @@ using InfiniteGravity.Scenes.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
+using Nez.Fuf;
 using Nez.UI;
 
 namespace InfiniteGravity.Scenes {
@@ -17,7 +18,7 @@ namespace InfiniteGravity.Scenes {
             
             var uiAssets = Core.services.GetService<UiAssets>();
 
-            var uiSkin = new Skin("UI/Skins/menu_skin", Core.content);
+            var uiSkin = new Skin("UI/Skins/menu_skin", FufCore.contentSource);
 
             var table = canvas.stage.addElement(new Table());
             table.setFillParent(true);

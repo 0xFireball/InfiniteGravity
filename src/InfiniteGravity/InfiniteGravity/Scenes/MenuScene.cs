@@ -3,6 +3,7 @@ using InfiniteGravity.Scenes.Base;
 using InfiniteGravity.Scenes.Menu;
 using Microsoft.Xna.Framework;
 using Nez;
+using Nez.Fuf;
 using Nez.Fuf.UI;
 using Nez.Tweens;
 using Nez.UI;
@@ -31,7 +32,7 @@ namespace InfiniteGravity.Scenes {
             var table = canvas.stage.addElement(new Table());
             table.setFillParent(true);
 
-            var uiSkin = new Skin("UI/Skins/menu_skin", Core.content);
+            var uiSkin = new Skin("UI/Skins/menu_skin", FufCore.contentSource);
             var menuButtonDimens = new Vector2(160, 42);
             var menuButtonPadding = 2;
             var menuGroupComposer =
