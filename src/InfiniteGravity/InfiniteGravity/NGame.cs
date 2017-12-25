@@ -13,7 +13,7 @@ namespace InfiniteGravity {
         public const int ViewportHeight = 540;
 
         public const string GameTitle = "InfiniteGravity";
-        public const string GameVersion = "0.1.001 dev";
+        public const string GameVersion = "0.0.2 dev";
 
         public const string PackedContentFile = "PackedContent.pak";
 
@@ -41,13 +41,11 @@ namespace InfiniteGravity {
             // Fixed timestep for physics updates
             IsFixedTimeStep = true;
 
-            // Set content sources
+            // Add content source for asset pak file
             if (File.Exists(PackedContentFile)) {
                 contentSource.addContentSource(
                     new PakFileContentSource(new PakFile(File.OpenRead(PackedContentFile))), 0);
             }
-
-            contentSource.addContentSource(new DirectoryContentSource(content.RootDirectory), 1);
 
             // Register code assets
             services.AddService(typeof(UiAssets), new UiAssets());

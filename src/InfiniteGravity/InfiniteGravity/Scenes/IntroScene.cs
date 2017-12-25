@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Nez.Fuf;
 using Nez.Sprites;
 using Nez.Tweens;
 
@@ -21,7 +22,7 @@ namespace InfiniteGravity.Scenes {
 
             clearColor = new Color(10);
 
-            var coverTexture = content.Load<Texture2D>("petaphaser_cover");
+            var coverTexture = FufCore.contentSource.Load<Texture2D>("petaphaser_cover");
             var cover = createEntity("cover", Core.instance.defaultResolution.ToVector2() / 2);
             var coverSprite = cover.addComponent(new Sprite(coverTexture));
             var targetWidth = Core.instance.defaultResolution.X * 0.7f;

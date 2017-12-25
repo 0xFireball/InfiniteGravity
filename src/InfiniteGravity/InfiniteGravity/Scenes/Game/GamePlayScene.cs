@@ -63,7 +63,7 @@ namespace InfiniteGravity.Scenes.Game {
 
             // map
             var mapEntity = createEntity("map_tiles");
-            var mapAsset = content.Load<TiledMap>($"{mapSource}/{_gameContext.map}");
+            var mapAsset = FufCore.contentSource.Load<TiledMap>($"{mapSource}/{_gameContext.map}");
             var mapComponent = mapEntity.addComponent(new TiledMapComponent(mapAsset, "blocks"));
             // map behind everything
             mapComponent.renderLayer = renderlayer_background;
