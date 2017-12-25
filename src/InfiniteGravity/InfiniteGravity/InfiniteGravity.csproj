@@ -33,8 +33,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FFAssetPack, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\FFAssetPack.1.0.1\lib\netstandard2.0\FFAssetPack.dll</HintPath>
+    <Reference Include="FFAssetPack, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\FFAssetPack.1.0.2\lib\netstandard2.0\FFAssetPack.dll</HintPath>
     </Reference>
     <Reference Include="MGLayers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MGLayers.1.0.0\lib\netstandard2.0\MGLayers.dll</HintPath>
