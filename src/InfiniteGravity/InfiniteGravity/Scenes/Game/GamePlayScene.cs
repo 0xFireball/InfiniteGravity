@@ -22,6 +22,8 @@ namespace InfiniteGravity.Scenes.Game {
         private const int renderlayer_ui_overlay = 1024;
         private const int renderlayer_cursor_overlay = 1 << 31;
 
+        private const int renderlayer_hud = 4;
+
         private const int renderlayer_pause_overlay = 2048;
 
         private Renderer pauseRenderer;
@@ -70,6 +72,12 @@ namespace InfiniteGravity.Scenes.Game {
 
             // add component to make camera follow the player
             var lockedCamera = camera.entity.addComponent(new LockedCamera(player, camera));
+            
+            // add HUD renderer
+            var hudRenderer = new ScreenSpaceRenderer(4, renderlayer_hud);
+            var healthHudEnt = createEntity("health_ind");
+            var healthHud = healthHudEnt.addComponent(
+                new Sprite(FufCore.contentSource.Load<Texture2D>("UI/Hud/health")) {renderLayer = renderlayer_hud});
 
             pauseRenderer = new ScreenSpaceRenderer(255, renderlayer_pause_overlay);
             var pauseBackdrop = createEntity("pause_backdrop");
