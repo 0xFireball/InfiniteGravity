@@ -11,15 +11,18 @@ namespace InfiniteGravity.Assets {
 
         public BitmapFont PixeledBMFont { get; }
 
-        public NezSpriteFont DisposableDroidLarge { get; }
+        public BitmapFont AndinaBMFont { get; }
 
-        public NezSpriteFont DisposableDroid { get; }
+        public NezSpriteFont Andina { get; }
+
+        public NezSpriteFont AndinaLarge { get; }
 
         public UiAssets() {
-            DisposableDroidLarge = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/disposable_droid_lg"));
-            DisposableDroid = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/disposable_droid"));
-
             PixeledBMFont = FufCore.contentSource.Load<BitmapFont>("Fonts/bm_pixeled");
+            AndinaBMFont = FufCore.contentSource.Load<BitmapFont>("Fonts/bm_andina");
+
+            Andina = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/andina"));
+            AndinaLarge = new NezSpriteFont(FufCore.contentSource.Load<SpriteFont>("Fonts/andina_lg"));
 
             const int buttonColorVal = 60;
             TextButtonStyle = new TextButtonStyle(

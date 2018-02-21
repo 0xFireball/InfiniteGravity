@@ -28,7 +28,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:petaphaser_cover.png
-
 #begin Fonts/bm_pixeled_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,19 +47,38 @@
 /processorParam:compressTextures=False
 /build:Fonts/bm_pixeled.fnt
 
-#begin Fonts/disposable_droid_lg.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
+#begin Fonts/bm_andina_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Fonts/disposable_droid_lg.spritefont
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Fonts/bm_andina_0.png
 
-#begin Fonts/disposable_droid.spritefont
+#begin Fonts/bm_andina.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/processorParam:packTexturesIntoXnb=True
+/processorParam:compressTextures=False
+/build:Fonts/bm_andina.fnt
+
+#begin Fonts/andina.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/disposable_droid.spritefont
+/build:Fonts/andina.spritefont
+
+#begin Fonts/andina_lg.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/andina_lg.spritefont
 
 #begin Sprites/Misc/cur_pointer.png
 /importer:TextureImporter
