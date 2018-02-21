@@ -1,7 +1,8 @@
-﻿using Nez.Fuf.Sprites;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Nez.Fuf.Sprites;
 
 namespace InfiniteGravity.Components.Characters {
-    public abstract class Character : FufDeferredSprite<Character.Animations> {
+    public abstract class Character : FufAnimatedSprite<Character.Animations> {
         public enum Animations {
             Idle,
             Ready,
@@ -15,6 +16,6 @@ namespace InfiniteGravity.Components.Characters {
 
         public CharacterBody body;
 
-        protected Character(string spriteAsset) : base(spriteAsset) { }
+        public Character(Texture2D texture, int width, int height) : base(texture, width, height) { }
     }
 }

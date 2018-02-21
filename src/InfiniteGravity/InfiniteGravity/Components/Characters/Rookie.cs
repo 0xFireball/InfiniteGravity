@@ -2,69 +2,71 @@
 using System.Collections.Generic;
 using InfiniteGravity.Components.Characters.Gear;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Nez.Fuf;
 using Nez.Sprites;
 using Nez.Textures;
 
 namespace InfiniteGravity.Components.Characters {
     public class Rookie : Character {
-        public Rookie(string sprite) : base(sprite) { }
+        public Rookie(string sprite) : base(FufCore.contentSource.Load<Texture2D>(sprite), 128, 128) { }
         public Rookie() : this("rookie") { }
 
-        protected override void loadSprites() {
-            loadGraphic($"Sprites/Characters/{spriteAsset}", true, 128, 128);
+        public override void initialize() {
+            base.initialize();
 
             var animationFps = 10f;
 
             // create animation
-            Animation.addAnimation(Animations.Idle, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[0]
+            animation.addAnimation(Animations.Idle, new SpriteAnimation(new List<Subtexture> {
+                subtextures[0]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Ready, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[1]
+            animation.addAnimation(Animations.Ready, new SpriteAnimation(new List<Subtexture> {
+                subtextures[1]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Run, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[2],
-                _subtextures[3],
-                _subtextures[4],
-                _subtextures[5]
+            animation.addAnimation(Animations.Run, new SpriteAnimation(new List<Subtexture> {
+                subtextures[2],
+                subtextures[3],
+                subtextures[4],
+                subtextures[5]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Melee1, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[6],
-                _subtextures[7],
-                _subtextures[8],
-                _subtextures[9]
+            animation.addAnimation(Animations.Melee1, new SpriteAnimation(new List<Subtexture> {
+                subtextures[6],
+                subtextures[7],
+                subtextures[8],
+                subtextures[9]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Melee2, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[10],
-                _subtextures[11],
-                _subtextures[12],
-                _subtextures[13]
+            animation.addAnimation(Animations.Melee2, new SpriteAnimation(new List<Subtexture> {
+                subtextures[10],
+                subtextures[11],
+                subtextures[12],
+                subtextures[13]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Melee3, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[14],
-                _subtextures[15],
-                _subtextures[16],
-                _subtextures[17]
+            animation.addAnimation(Animations.Melee3, new SpriteAnimation(new List<Subtexture> {
+                subtextures[14],
+                subtextures[15],
+                subtextures[16],
+                subtextures[17]
             }) {fps = animationFps});
 
-            Animation.addAnimation(Animations.Gun1, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[18],
-                _subtextures[19],
-                _subtextures[20],
-                _subtextures[21]
+            animation.addAnimation(Animations.Gun1, new SpriteAnimation(new List<Subtexture> {
+                subtextures[18],
+                subtextures[19],
+                subtextures[20],
+                subtextures[21]
             }) {fps = animationFps});
-            
-            Animation.addAnimation(Animations.Hurt1, new SpriteAnimation(new List<Subtexture> {
-                _subtextures[22],
-                _subtextures[23],
-                _subtextures[24],
-                _subtextures[25]
+
+            animation.addAnimation(Animations.Hurt1, new SpriteAnimation(new List<Subtexture> {
+                subtextures[22],
+                subtextures[23],
+                subtextures[24],
+                subtextures[25]
             }) {fps = animationFps});
 
             // flip X based on facing direction

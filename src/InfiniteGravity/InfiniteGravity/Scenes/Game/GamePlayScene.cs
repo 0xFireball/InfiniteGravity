@@ -1,7 +1,6 @@
-﻿using System;
-using InfiniteGravity.Components.Camera;
+﻿using InfiniteGravity.Components.Camera;
 using InfiniteGravity.Components.Characters;
-using InfiniteGravity.Components.Misc;
+using InfiniteGravity.Components.Misc.RogueScientist.Components.Misc;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes.Base;
 using Microsoft.Xna.Framework;
@@ -47,7 +46,7 @@ namespace InfiniteGravity.Scenes.Game {
 
             // ...and add custom cursor
             var targetCursor = createEntity("cursor");
-            var cursorComponent = targetCursor.addComponent<TargetCursor>();
+            var cursorComponent = targetCursor.addComponent(new TargetCursor(renderlayer_cursor_overlay));
             cursorComponent.sprite.renderLayer = renderlayer_cursor_overlay;
             targetCursor.addComponent<MouseFollow>();
 

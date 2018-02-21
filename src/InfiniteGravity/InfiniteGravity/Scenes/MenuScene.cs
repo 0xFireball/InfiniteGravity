@@ -53,7 +53,7 @@ namespace InfiniteGravity.Scenes {
 
             var textButtons = canvas.stage.findAllElementsOfType<TextButton>();
             canvas.stage.setGamepadFocusElement(textButtons[0]);
-            setupGamepadInput(canvas);
+            setupGamepadInput();
 
             var borderPadding = 20;
 

@@ -39,7 +39,7 @@ namespace InfiniteGravity.Scenes {
             leftTable.row();
 
             canvas.stage.setGamepadFocusElement(backButton);
-            setupGamepadInput(canvas);
+            setupGamepadInput();
             
             rightTable.add(new Label("SETTINGS", uiSkin.get<LabelStyle>(themeId))).setPadBottom(40).center();
             rightTable.row();

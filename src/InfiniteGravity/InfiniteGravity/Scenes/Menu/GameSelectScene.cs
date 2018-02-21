@@ -44,7 +44,7 @@ namespace InfiniteGravity.Scenes.Menu {
 
             var textButtons = canvas.stage.findAllElementsOfType<TextButton>();
             canvas.stage.setGamepadFocusElement(textButtons[0]);
-            setupGamepadInput(canvas);
+            setupGamepadInput();
         }
 
         public override void update() {

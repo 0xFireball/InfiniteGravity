@@ -1,7 +1,7 @@
-﻿using InfiniteGravity.Components.Misc;
+﻿using InfiniteGravity.Components.Misc.RogueScientist.Components.Misc;
 using Microsoft.Xna.Framework.Input;
 using Nez;
-using Nez.Fuf;
+using Nez.Fuf.Util;
 
 namespace InfiniteGravity.Scenes.Base {
     public class BaseUIScene : BaseGameScene {
@@ -26,7 +26,7 @@ namespace InfiniteGravity.Scenes.Base {
             canvas = uiRoot.addComponent<UICanvas>();
         }
 
-        protected void setupGamepadInput(UICanvas canvas) {
+        protected void setupGamepadInput() {
             canvas.stage.keyboardEmulatesGamepad = true;
             canvas.stage.keyboardActionKey = Keys.E;
             canvas.stage.keyboardLeftKey = Keys.A;

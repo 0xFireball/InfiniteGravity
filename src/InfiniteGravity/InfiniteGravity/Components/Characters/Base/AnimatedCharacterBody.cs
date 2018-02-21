@@ -4,7 +4,6 @@ using Nez;
 
 namespace InfiniteGravity.Components.Characters {
     public abstract class AnimatedCharacterBody : CharacterBody {
-
         public override void update() {
             base.update();
 
@@ -28,7 +27,7 @@ namespace InfiniteGravity.Components.Characters {
                     animation = Character.Animations.Run;
                 }
             }
-            
+
             // body-based animation
             switch (bodyState) {
                 case BodyState.Hurt:
@@ -42,7 +41,7 @@ namespace InfiniteGravity.Components.Characters {
                     if (meleeComboCount == 0) animation = Character.Animations.Melee1;
                     else if (meleeComboCount == 1) animation = Character.Animations.Melee2;
                     else if (meleeComboCount == 2) animation = Character.Animations.Melee3;
-                    
+
                     break;
                 case ActionState.Gun:
                     animation = Character.Animations.Gun1;
@@ -56,8 +55,8 @@ namespace InfiniteGravity.Components.Characters {
                     break;
             }
 
-            if (!sprite.Animation.isAnimationPlaying(animation)) {
-                sprite.Animation.play(animation);
+            if (!sprite.animation.isAnimationPlaying(animation)) {
+                sprite.animation.play(animation);
             }
         }
     }
