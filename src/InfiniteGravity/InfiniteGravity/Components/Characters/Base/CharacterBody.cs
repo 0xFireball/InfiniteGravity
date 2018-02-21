@@ -29,6 +29,8 @@ namespace InfiniteGravity.Components.Characters {
 
         public float jumpVelocity = -240f;
 
+        // Actions
+        
         public ActionState actionState;
 
         /// <summary>
@@ -36,16 +38,7 @@ namespace InfiniteGravity.Components.Characters {
         /// </summary>
         public float actionTime = 0;
 
-        // Actions
-
-        public bool actionCombo = false;
-
-        private const float attackActionDuration = 0.38f;
-
-        // Melee weapon
-        public float meleeComboTime = 0.1f;
-
-        public int meleeComboCount = 0;
+        private const float attack_action_duration = 0.4f;
 
         public Collider bodyCollider;
 
@@ -245,14 +238,13 @@ namespace InfiniteGravity.Components.Characters {
 
                 if (_controller.primaryActionInput) {
                     actionState = ActionState.Melee;
-                    actionTime = attackActionDuration; // match animation length
-                    meleeComboCount = 0;
+                    actionTime = attack_action_duration; // match animation length
                     hitMelee();
                 }
 
                 if (_controller.secondaryActionInput) {
                     actionState = ActionState.Gun;
-                    actionTime = attackActionDuration;
+                    actionTime = attack_action_duration;
                     hitGun();
                 }
             }
@@ -260,32 +252,10 @@ namespace InfiniteGravity.Components.Characters {
             // update action status
             if (actionState != ActionState.None) {
                 if (actionTime <= 0) {
-                    if (actionCombo) {
-                        actionCombo = false;
-                        if (actionState == ActionState.Melee && meleeComboCount < 3) {
-                            // melee combo
-                            meleeComboCount++;
-                            actionTime = attackActionDuration;
-                            hitMelee();
-                        }
-                    } else if (actionState == ActionState.Cooldown) {
-                        // action is over
-                        actionState = ActionState.None;
-                    } else {
-                        // force a cooldown
-                        actionState = ActionState.Cooldown;
-                        actionTime = 0.2f;
-                    }
+                    // action is over
+                    actionState = ActionState.None;
                 } else {
                     actionTime -= Time.deltaTime;
-                }
-            }
-
-            // combos
-            if (movementState == MovementState.Attached && actionState == ActionState.Melee) {
-                if (_controller.primaryActionInput.isPressed && actionTime < meleeComboTime) {
-                    // melee combo
-                    actionCombo = true;
                 }
             }
         }

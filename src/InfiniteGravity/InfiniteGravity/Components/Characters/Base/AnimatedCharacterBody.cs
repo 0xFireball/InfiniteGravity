@@ -38,9 +38,7 @@ namespace InfiniteGravity.Components.Characters {
             // action-based animation
             switch (actionState) {
                 case ActionState.Melee:
-                    if (meleeComboCount == 0) animation = Character.Animations.Melee1;
-                    else if (meleeComboCount == 1) animation = Character.Animations.Melee2;
-                    else if (meleeComboCount == 2) animation = Character.Animations.Melee3;
+                    animation = Character.Animations.Melee1;
 
                     break;
                 case ActionState.Gun:
