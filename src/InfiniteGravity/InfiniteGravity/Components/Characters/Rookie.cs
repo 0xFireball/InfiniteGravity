@@ -10,8 +10,7 @@ using Nez.Textures;
 
 namespace InfiniteGravity.Components.Characters {
     public class Rookie : Character {
-        public Rookie(string sprite) : base(FufCore.contentSource.Load<Texture2D>(sprite), 128, 128) { }
-        public Rookie() : this("rookie") { }
+        public Rookie() : base(FufCore.contentSource.Load<Texture2D>("Sprites/Characters/rookie"), 128, 128) { }
 
         public override void initialize() {
             base.initialize();
