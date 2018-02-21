@@ -38,35 +38,35 @@ namespace InfiniteGravity.Components.Characters {
                 subtextures[7],
                 subtextures[8],
                 subtextures[9]
-            }) {fps = animationFps});
+            }) {fps = animationFps, loop = false});
 
             animation.addAnimation(Animations.Melee2, new SpriteAnimation(new List<Subtexture> {
                 subtextures[10],
                 subtextures[11],
                 subtextures[12],
                 subtextures[13]
-            }) {fps = animationFps});
+            }) {fps = animationFps, loop = false});
 
             animation.addAnimation(Animations.Melee3, new SpriteAnimation(new List<Subtexture> {
                 subtextures[14],
                 subtextures[15],
                 subtextures[16],
                 subtextures[17]
-            }) {fps = animationFps});
+            }) {fps = animationFps, loop = false});
 
             animation.addAnimation(Animations.Gun1, new SpriteAnimation(new List<Subtexture> {
                 subtextures[18],
                 subtextures[19],
                 subtextures[20],
                 subtextures[21]
-            }) {fps = animationFps});
+            }) {fps = animationFps, loop = false});
 
             animation.addAnimation(Animations.Hurt1, new SpriteAnimation(new List<Subtexture> {
                 subtextures[22],
                 subtextures[23],
                 subtextures[24],
                 subtextures[25]
-            }) {fps = animationFps});
+            }) {fps = animationFps, loop = false});
 
             // flip X based on facing direction
             setFacingFlip(true, false);

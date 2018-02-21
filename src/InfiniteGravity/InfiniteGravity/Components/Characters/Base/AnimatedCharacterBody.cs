@@ -39,7 +39,6 @@ namespace InfiniteGravity.Components.Characters {
             switch (actionState) {
                 case ActionState.Melee:
                     animation = Character.Animations.Melee1;
-
                     break;
                 case ActionState.Gun:
                     animation = Character.Animations.Gun1;
@@ -52,7 +51,7 @@ namespace InfiniteGravity.Components.Characters {
                     sprite.facing = lastFacing;
                     break;
             }
-
+            
             if (!sprite.animation.isAnimationPlaying(animation)) {
                 sprite.animation.play(animation);
             }
