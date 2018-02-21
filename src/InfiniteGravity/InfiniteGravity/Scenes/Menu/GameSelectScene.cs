@@ -16,9 +16,8 @@ namespace InfiniteGravity.Scenes.Menu {
 
             var uiAssets = Core.services.GetService<UiAssets>();
 
-            var infoText = new TextComposer(uiAssets.AndinaLarge) {
-                Text = "Game Select"
-            }.attach(this, new Vector2(NGame.ViewportWidth / 2, 120), Color.WhiteSmoke, "info_text");
+            var infoText = new TextComposer("Game Select", uiAssets.AndinaBMFont, 3)
+                .attach(this, new Vector2(NGame.ViewportWidth / 2, 120), Color.WhiteSmoke, "info_text");
             infoText.updateOffsets(new Vector2(infoText.TextComponent.width / 2,
                                        infoText.TextComponent.height / 2) * -1);
 

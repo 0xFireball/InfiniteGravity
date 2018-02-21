@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\StringResources.cs" />
     <Compile Include="Assets\UiAssets.cs" />
     <Compile Include="Components\Camera\LockedCamera.cs" />
     <Compile Include="Components\Characters\AntiRookie.cs" />

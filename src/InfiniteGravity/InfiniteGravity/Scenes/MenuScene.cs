@@ -10,7 +10,6 @@ using Nez.UI;
 
 namespace InfiniteGravity.Scenes {
     public class MenuScene : BaseUIScene {
-
         public override void initialize() {
             base.initialize();
 
@@ -18,9 +17,8 @@ namespace InfiniteGravity.Scenes {
 
             var uiAssets = Core.services.GetService<UiAssets>();
 
-            var titleTextCom = new TextComposer(uiAssets.AndinaLarge) {
-                Text = NGame.GameTitle
-            }.attach(this, new Vector2(NGame.ViewportWidth / 2f, 120), new Color(125, 74, 94), "title_text");
+            var titleTextCom = new TextComposer(NGame.GameTitle, uiAssets.AndinaBMFont, 3)
+                .attach(this, new Vector2(NGame.ViewportWidth / 2f, 120), new Color(125, 74, 94), "title_text");
             titleTextCom.updateOffsets(new Vector2(titleTextCom.TextComponent.width / 2,
                                            titleTextCom.TextComponent.height / 2) * -1);
 
@@ -57,9 +55,10 @@ namespace InfiniteGravity.Scenes {
 
             var borderPadding = 20;
 
-            var petaphaserTextCom = new TextComposer(uiAssets.Andina) {
-                Text = "PetaPhaser"
-            }.attach(this, new Vector2(0, NGame.ViewportHeight), Color.WhiteSmoke, "petaphaser_t");
+            var petaphaserTextCom =
+                new TextComposer(StringResources.DEVELOPER_NAME, uiAssets.AndinaBMFont, 1f)
+                    .attach(this,
+                        new Vector2(0, NGame.ViewportHeight), Color.WhiteSmoke, "petaphaser_t");
             petaphaserTextCom.updateOffsets(new Vector2(borderPadding,
                 -(petaphaserTextCom.TextComponent.height / 2 + borderPadding)));
 
@@ -69,9 +68,8 @@ namespace InfiniteGravity.Scenes {
                 .setLoops(LoopType.RestartFromBeginning, 96, 2.7f)
                 .start();
 
-            var versionTextCom = new TextComposer(uiAssets.Andina) {
-                Text = $"v{NGame.GameVersion}"
-            }.attach(this, new Vector2(NGame.ViewportWidth, NGame.ViewportHeight), Color.White, "version_t");
+            var versionTextCom = new TextComposer($"v{NGame.GameVersion}", uiAssets.AndinaBMFont, 1f)
+                .attach(this, new Vector2(NGame.ViewportWidth, NGame.ViewportHeight), Color.White, "version_t");
             versionTextCom.updateOffsets(new Vector2(versionTextCom.TextComponent.width + borderPadding,
                                              versionTextCom.TextComponent.height / 2 + borderPadding) * -1);
         }

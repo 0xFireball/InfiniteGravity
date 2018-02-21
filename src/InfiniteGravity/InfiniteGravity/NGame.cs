@@ -4,6 +4,7 @@ using InfiniteGravity.Assets;
 using InfiniteGravity.Configuration;
 using InfiniteGravity.Scenes;
 using MGLayers;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Fuf;
 
