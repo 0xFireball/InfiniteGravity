@@ -9,23 +9,21 @@ namespace InfiniteGravity.Components.Characters {
             base.initialize();
 
             moveDirectionInput.nodes.Add(new VirtualJoystick.KeyboardKeys(VirtualInput.OverlapBehavior.CancelOut,
-                Keys.Left, Keys.Right, Keys.Up, Keys.Down));
-            moveDirectionInput.nodes.Add(new VirtualJoystick.KeyboardKeys(VirtualInput.OverlapBehavior.CancelOut,
-                Keys.J, Keys.L, Keys.I, Keys.K));
+                Keys.A, Keys.D, Keys.W, Keys.S));
             moveDirectionInput.nodes.Add(new VirtualJoystick.GamePadLeftStick());
             
             thrustInput.nodes.Add(new VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.CancelOut, Keys.Z, Keys.X));
 
             primaryActionInput.nodes.Add(new VirtualButton.MouseLeftButton());
-            primaryActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.A));
+            primaryActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.J));
             
             secondaryActionInput.nodes.Add(new VirtualButton.MouseRightButton());
-            secondaryActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.S));
+            secondaryActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.K));
 
             targetDirectionInput.nodes.Add(new VirtualJoystick.GamePadRightStick());
             targetDirectionInput.nodes.Add(new Nez.Fuf.VirtualJoystick.MouseDirectionalJoystick(entity.scene.camera));
             
-            aimActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.D));
+            aimActionInput.nodes.Add(new VirtualButton.KeyboardKey(Keys.Q));
         }
     }
 }
